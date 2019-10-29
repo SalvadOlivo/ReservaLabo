@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/main.js"></script>
+    <title>SRL</title>
+</head>
+<body>
+    <header>.
+        <nav class="menu">
+             <ul class="dias">
+                    <li id="inicio">Inicio</li>
+                    <li id="initSesion">Iniciar Sesion</li>
+                    <li id="reservar">Reserva</li>
+                    <li id="user">usuario</li>     
+            </ul>
+        </nav>
+    </header>
+    <body>
+     <nav class="horarios">
+        <nav class="tituloHorario">
+            <h1>Horario de Laboratorios</h1>
+            <h3>fecha: 21/10/20199-25/10/2019</h3>
+        </nav>
+        <br>
+        <nav >
+            <table  class="matutino" border="1">
+                    <tr>
+                        <td>HORA</td>
+                        <td>LUNES</td>
+                        <td>MARTES</td>
+                        <td>MIERCOLES</td>
+                        <td>JUEVES</td>
+                        <td>VIERNES</td>
+                        <td>SABADO</td>
+                    </tr>
+                    <tr><td>7:00am - 8:00am</td>
+                        <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr><td>8:00am - 9:00am</td>
+                        <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr><td>9:00am -10:00am</td>
+                        <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr><td>10:00am-11:00am</td>
+                        <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                    <tr><td>11:00am-12:00pm</td>
+                        <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    </tr>
+                     </table>
+        </nav>
+        <br>
+        <nav class="despertino">
+            <table border = "1">
+                <tr>
+                   <td>HORA</td>
+                   <td>LUNES</td>
+                   <td>MARTES</td>
+                   <td>MIERCOLES</td>
+                   <td>JUEVES</td>
+                   <td>VIERNES</td>
+                   <td>SABADO</td>
+                 </tr>
+                 <tr><td>1:00 pm - 2:00pm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                 <tr><td>2:00 pm - 3:00pm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                 
+                 <tr><td>3:00 pm - 4:00pm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                 <tr><td>4:00 pm - 5:00pm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                 <tr><td>5:00 pm - 6:00pm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+           </table>
+        </nav>
+    </nav>
+        <nav class="login">
+                <form action="action_page.php" method="post">
+                       
+                        <div class="container">
+                          <label for="uname"><b>Username</b></label>
+                          <input type="text" placeholder="Enter Username" name="uname" required>
+                      
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="psw" required>
+                      
+                          <button type="submit">Login</button>
+                          <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                          </label>
+                        </div>
+                      
+                        <div class="container" style="background-color:#f1f1f1">
+                          <button type="button" id="registro">Registrarse</button>
+                          <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
+                      </form>
+
+        </nav>
+        <nav class="crearUser">
+                <form action="action_page.php" method="post">
+                       <h2>registro</h2>
+                        <div class="container">
+                          <label for="uname"><b>Username</b></label>
+                          <input type="text" placeholder="Enter Username" name="uname" required>
+                      
+                          <label for="psw"><b>Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="psw" required>
+                          <label for="psw"><b> Confirmar Password</b></label>
+                          <input type="password" placeholder="Enter Password" name="pswC" required>
+                      
+                          <button type="submit" id="register">Confirmar</button>
+                          <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                          </label>
+                        </div>
+                      </form>
+
+
+
+        </nav>
+    </body>
+    <footer>
+    </footer>
+
+
+    
+</body>
+</html>
