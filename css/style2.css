@@ -10588,6 +10588,35 @@ header nav{
   line-height: 60px;
   width: 100%;
   background: black;
+ 
 
 }
 
+div.col-md-4.mb-3 {
+  margin: 5% auto;
+}
+
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+}
+
+header div{
+  justify-items: center;
+}
+
+reserva{
+  display: flex;
+  justify-content: center;
+}
+
+.container-content{
+  
+  background-image: url("https://i.pinimg.com/originals/39/2d/67/392d675638b96f888aebf283910b3b50.jpg");
+
+  background-size: cover;
+  background-repeat: no-repeat;
+}
