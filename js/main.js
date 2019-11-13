@@ -4,12 +4,12 @@ window.onload = () => {
     btn_reserva = document.getElementById("reservar");
     btn_r = document.getElementById("registro");
     
-    let horarios = document.getElementsByClassName("horarios");
+    /*let horarios = document.getElementsByClassName("horarios");
     let inicioSesion = document.getElementsByClassName("login");
     let registro = document.getElementsByClassName("crearUser");
-    let reserva = document.getElementsByClassName("reserva");
+    let reserva = document.getElementsByClassName("reserva");*/
     
-    function clickbtn(unnumero) {
+    /*function clickbtn(unnumero) {
         if (unnumero == 0) {
             horarios[0].setAttribute("style", "display:block");
             inicioSesion[0].setAttribute("style", "display:none");
@@ -63,7 +63,7 @@ window.onload = () => {
     
     });
     
-    
+    */
     };
 
     function addZero(i) {

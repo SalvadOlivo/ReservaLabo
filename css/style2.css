@@ -10558,7 +10558,7 @@ a.text-dark:hover, a.text-dark:focus {
   margin: 40px auto;
 }
 
-.horarios{
+/*.horarios{
     display:block;
 }
 .login{
@@ -10569,7 +10569,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 .reserva{
   display: none;
-}
+}*/
 
 header nav ul li{
   color: white;
