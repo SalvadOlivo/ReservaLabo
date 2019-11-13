@@ -19,7 +19,6 @@ module.exports = (app, passport) => {
         failureFlash: true
     }));
 
-
     app.get('/signup', (req, res) =>{
         res.render('signup', {
             message: req.flash('signupMessage')
@@ -37,7 +36,6 @@ module.exports = (app, passport) => {
             user: req.user
         })
     })
-
 
     app.get('/logout', (req, res) => {
 		req.logout();
