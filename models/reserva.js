@@ -1,23 +1,20 @@
 const Mongoose = require("mongoose");
 
 const ReservaSchema = Mongoose.Schema({
+
   software: String,
   descripcion: String,
   tipo: String,
-  sala: String,
+  laboratorio: { type: Mongoose.Schema.Types.ObjectId, ref: "laboratorio" },
   duracion: Double,
-  responsable: String,
-  confirmacion: Boolean,
-  tipo_repeticion: String,
-  dia_repeticion: String,
-  fecha_inicio: Date,
-  fecha_fin: Date,
+  responsable: {  type: Mongoose.Schema.Types.ObjectId, ref: "user"},
+  estado: String,
   numero_personas: Integer,
-  fecha_tope: Date,
-  numero_semana: Integer,
   ultima_modificacion: Date,
-  creada_por: String,
-  modificada_por: String,
+  creada_por: {  type: Mongoose.Schema.Types.ObjectId, ref: "user"},
+  modificada_por: {  type: Mongoose.Schema.Types.ObjectId, ref: "user"},
+  repeticion: {type: String, dia: String, fecha_inicio: Date, fecha_fin: Date, 
+    hora_inicio: Date, hora_fin: Date, fecha_tope: Date, numero_semana: Integer}
 });
 
 
