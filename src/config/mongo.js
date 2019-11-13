@@ -2,6 +2,7 @@ const  mongoose  = require('mongoose')
 
 let database = 'ReservaLabo'
 let host = 'localhost'
+let port = '50451'
 let uri = `mongodb://${host}/${database}`
 
 const connect = ()=>{
