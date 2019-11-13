@@ -26,6 +26,7 @@ module.exports = function (passport) {
                 return done(null, false, req.flash('signupMessage', 'El usuario ya existe'));
             } else {
                 var nuevoUsuario = new usuario();
+                nuevoUsuario.nombre = req.body.nombre;
                 nuevoUsuario.username = username;
                 nuevoUsuario.password = nuevoUsuario.generateHash(password);
                 nuevoUsuario.save(function (err){
