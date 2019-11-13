@@ -65,14 +65,33 @@ window.onload = () => {
     
     
     };
+
+    function addZero(i) {
+      if (i < 10) {
+          i = '0' + i;
+      }
+      return i;
+  }
+
+    var hoy = new Date();
+    var dd = hoy.getDate();
+    var mm = hoy.getMonth()+1;
+    var yyyy = hoy.getFullYear();
+
+    dd = addZero(dd);
+    mm = addZero(mm);
     
     document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
       
         var calendar = new FullCalendar.Calendar(calendarEl, {
           plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+          selectable: true,
           defaultView: 'dayGridMonth',
-          defaultDate: '2019-08-07',
+          defaultDate: `${yyyy}-${mm}-${dd}`,
+          dateClick: function(info) {
+            alert('clicked ' + info.dateStr);
+          },
           header: {
             left: 'prev,next today',
             center: 'title',
@@ -130,3 +149,6 @@ window.onload = () => {
       
         calendar.render();
        });
+
+
+       
