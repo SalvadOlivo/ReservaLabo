@@ -1,51 +1,41 @@
 const User = require('../models/user')
 
-//GET ALL
-const getAll = (req, res) =>{
-     Registro.find((err, usuarios) => {
-         if(err) return res.status(500).json({mensaje: "Error"})
-         return res.status(200).json(usuarios)
-     })
-    
+//LOGOUT
+const logout = (req, res) => {
+    req.logout();
+    res.redirect('/');
 }
 
-//GET ONE BY ID
-const getOneById = (req, res) =>{
-    Registro.findById(req.params.id, (err, usuario) =>{
-        if(err) return res.status(500).json({mensaje: "Error"})
-        return res.status(200).json(usuario)
+//INDEX
+const inicio = (req, res) => {
+    res.render('index');
+}
+
+//INICIAR SESION
+const sesion = (req, res) => {
+    res.render('login', {
+        message: req.flash('loginMessage')
+    });
+}
+
+//REGISTRARSE
+const registrarse = (req, res) =>{
+    res.render('signup', {
+        message: req.flash('signupMessage')
+    });
+}
+
+//PERFIL
+const perfil = (req, res) => {
+    res.render('profile', {
+        user: req.user
     })
-}
-
-//POST
-const insert = async (req, res) =>{
-    let registro = new User({
-        nombre: req.body.nombre,
-        username : req.body.username,
-        password : req.body.password,
-        rol: req.body.rol
-    })
-    await registro.save()
-    res.status(201).json({
-        mensaje: "hola"
-    })
-    
-}
-
-//PUT
-const update = (req, res) =>{
-    
-}
-
-//DELETE
-const erase = (req, res) =>{
-    
 }
 
 module.exports = {
-    getAll,
-    getOneById,
-    insert,
-    update,
-    erase
+    logout,
+    inicio,
+    sesion,
+    registrarse,
+    perfil
 }

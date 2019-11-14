@@ -36,7 +36,8 @@ app.use(passport.session());
 app.use(flash());
 
 //routes
-require('./routes/index.js')(app, passport);
+app.use('/', require('./routes/usuario'))
+app.use('/', require('./routes/reserva'))
 
 //static files
 app.use(express.static(path.join(__dirname, 'public')))
