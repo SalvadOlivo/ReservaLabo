@@ -10621,22 +10621,21 @@ body{
   background-repeat: no-repeat;
 }
 
-#content-error{
+.content-error{
   width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
 }
 
-#description-error{
-  background-color: white;
-  padding: 1em;
+.image_error{
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 85%;
 }
 
-#image_error{
-  background-image: url("error_image.png");
-  min-width: 400px;
-  min-height: 200px;
-  border-radius: 1em;
+.e404{
+  background-image: url("../images/error_404_img.png");
 }
