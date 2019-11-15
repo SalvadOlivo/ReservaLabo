@@ -11,4 +11,6 @@ router.get('/calendario', reservaController.calendar)
 
 router.get('/obtener', reservaController.mostrar)
 
+router.get('/obtenerP', reservaController.mostrarP)
+
 module.exports = router;

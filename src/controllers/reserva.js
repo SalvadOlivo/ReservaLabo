@@ -23,10 +23,20 @@ const mostrar = (req, res) =>{
         return res.status(200).json(registros)
     })
 }
+const mostrarP = (req, res) =>{
+    res.json([
+    {
+        'title': "prueba",
+        'description' : 'es una prueba olv',
+        'start' : "2019-11-13T00:00:00.000Z"
+    }
+    ])
+}
 
 module.exports = {
     inicio, 
     registrarse,
     calendar,
-    mostrar
+    mostrar,
+    mostrarP
 }
