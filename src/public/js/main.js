@@ -37,28 +37,30 @@ function obtenerEventos(calendar){
   })
   .then(data => {
     data.forEach(element => {
-      let fecha_inicio = new Date(element.fecha_inicio)
-      let fecha_tope = new Date(element.repeticion.fecha_tope)
-      console.log("FECHA-TOPE: ", fecha_tope)
-      console.log("FECHA-INICIO: ", fecha_inicio)
+      if(element.estado == "Aprobada"){
+        let fecha_inicio = new Date(element.fecha_inicio)
+        let fecha_tope = new Date(element.repeticion.fecha_tope)
+        console.log("FECHA-TOPE: ", fecha_tope)
+        console.log("FECHA-INICIO: ", fecha_inicio)
 
-      fecha_tope = afterDay(fecha_tope)
-      let jArray = {}
-      if(element.repeticion.tipo === 'diaria'){
-        jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
-      }
-      else if(element.repeticion.tipo === 'semanal'){
-        jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
-      }
+        fecha_tope = afterDay(fecha_tope)
+        let jArray = {}
+        if(element.repeticion.tipo === 'diaria'){
+          jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
+        }
+        else if(element.repeticion.tipo === 'semanal'){
+          jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
+        }
 
-      jArray['startTime'] = fecha_inicio.toLocaleTimeString();
-      jArray['endTime'] = '10:30'
-      jArray['startRecur'] = obtenerFecha(fecha_inicio,1)
-      jArray['endRecur'] = obtenerFecha(fecha_tope,0)
-      console.log('DAY: ', element.descripcion)
-      console.log(jArray['endRecur'])
-      jArray['title'] = element.descripcion
-      eventos.push(jArray)
+        jArray['startTime'] = fecha_inicio.toLocaleTimeString();
+        jArray['endTime'] = '10:30'
+        jArray['startRecur'] = obtenerFecha(fecha_inicio,1)
+        jArray['endRecur'] = obtenerFecha(fecha_tope,0)
+        console.log('DAY: ', element.descripcion)
+        console.log(jArray['endRecur'])
+        jArray['title'] = element.descripcion
+        eventos.push(jArray)
+      }
     });
     calendar.addEventSource(eventos);
   })

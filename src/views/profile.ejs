@@ -1,5 +1,4 @@
 <% include partials/head %>
-
 <title>Perfil</title>
 <link rel="stylesheet" href="/css/style2.css" type="text/css">
 </head>
@@ -13,33 +12,54 @@
           </header>
           <hr>
           <div class="container">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h3 class="card-title"><span class="fa fa-user"></span> Local</h3>
-                  <p>
-                    <strong>id</strong> : <%= user._id %> <br>
-                    <strong>nombre</strong> : <%= user.nombre %> <br>
-                    <strong>rol</strong> : <%= user.rol %> <br>
-                    <label for="change_rol" class="only-admin"><b>Rol a cambiar:</b></label>
-                    <select name="change_rol" id="change_rol_choose" class="form-control only-admin">
-                      <option>Estudiante</option>
-                      <option>Invitado</option>
-                      <option>Profesor</option>
-                      <option>Mantenimiento</option>
-                      <option>Ordenanza</option>
-                      <option>Responsable</option>
-                  </select>
-                    <button class="only-admin btn btn-warning">Cambiar rol</button>
-                    <strong>usuario</strong> : <%= user.username %> <br>
-                    <strong>password</strong> : <%= user.password %>
-                  </p>
-                  <a href="/logout" class="btn btn-light btn-sm">
-                    Logout
-                  </a>
+            <div class = "row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title"><span class="fa fa-user"></span> Local</h3>
+                    <p>
+                      <strong>id</strong> : <%= user._id %> <br>
+                      <strong>nombre</strong> : <%= user.nombre %> <br>
+                      <strong>rol</strong> : <%= user.rol %> <br>
+                      <strong>usuario</strong> : <%= user.username %> <br>
+                      <strong>password</strong> : <%= user.password %>
+                    </p>
+                    <a href="/logout" class="btn btn-light btn-sm">
+                      Logout
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+              <% if(user.rol == 'admin') { %>
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class = "card-body">
+                      <h3 class = "card-title"><i class="fa fa-users"></i> Usuarios registrados </h3>
+                      <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th>N</th>
+                              <th>Usuario</th>
+                              <th>Rol</th>
+                              <th>Edicion</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% for(var i = 0; i < users.length; i++){ %>
+                              <tr>
+                                  <td><%= i + 1 %></td>
+                                  <td><%= users[i].username %></td>
+                                  <td><%= users[i].rol %></td>
+                                  <td>
+                                    <a href="/edit/<%= users[i]._id %>" class="btn btn-info"> Editar </a>
+                                  </td>
+                              </tr>
+                            <% } %>
+                    </div>
+                  </div>
+                </div>
+              <% } %>
+          </div>
           </div>
         </div>
       </body>

@@ -26,6 +26,10 @@ router.get('/profile',Auth.isAuthentication, usuarioController.perfil)
 
 router.get('/logout', usuarioController.logout);
 
+router.get('/edit/:id', usuarioController.modView)
+
+router.post('/edit/:id', usuarioController.modificar)
+
 
 module.exports = router
 

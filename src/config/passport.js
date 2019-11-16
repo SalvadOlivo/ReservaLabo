@@ -30,6 +30,7 @@ module.exports = function (passport) {
                 nuevoUsuario.email = req.body.email;
                 nuevoUsuario.username = username;
                 nuevoUsuario.password = nuevoUsuario.generateHash(password);
+                nuevoUsuario.rol = req.body.rol;
                 nuevoUsuario.save(function (err){
                     if(err) {throw err;}
                     return done(null, nuevoUsuario);

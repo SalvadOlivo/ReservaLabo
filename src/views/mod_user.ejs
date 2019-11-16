@@ -9,31 +9,29 @@
       <div class="card-body">
         <!-- messages -->
         <h1 class="text-center">
-          <span class="fa fa-sign-in"></span> Registrarse
+          <span class="fas fa-user-edit"></span> Modificar
         </h1>
-        <% if (message.length > 0) { %>
-          <div class="alert alert-danger">
-            <%= message %>
-          </div>
-        <% } %>
-
         <!-- form -->
-        <form action="/signup" method="post">
+        <form action="/edit/<%= user._id %>" method="post">
           <div class="form-group">
-            <label for="nnombre">Nombre</label>
-            <input type="text" name="nombre" class="form-control">
+            <label for="nnombre">Nombre: <%= user.nombre %></label>
           </div>
           <div class="form-group">
-              <label for="username">Usuario</label>
-              <input type="text" name="username" class="form-control">
+              <label for="username">Usuario: <%= user.username %></label>
           </div>
           <div class="form-group">
-            <label for="email">E-mail</label>
-            <input type="email" name="email" class="form-control">
+            <label for="email">Email: <%= user.email %></label>
         </div>
           <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" class="form-control">
+            <label for="rol">Rol: </label>
+            <select name="rol" id="change_rol_choose" class="form-control only-admin">
+                <option>Estudiante</option>
+                <option>Invitado</option>
+                <option>Profesor</option>
+                <option>Mantenimiento</option>
+                <option>Ordenanza</option>
+                <option>Responsable</option>
+            </select>
           </div>
           <input type="submit" class="btn btn-dark btn-lg">
         </form>
