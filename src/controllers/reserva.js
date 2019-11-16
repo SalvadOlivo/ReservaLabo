@@ -8,6 +8,7 @@ const inicio = (req, res) =>{
 
 //REGISTRARSE
 const registrarse = async (req, res) =>{
+    console.log(req.body)
     const registro = new Reserva(req.body);
     await registro.save();
     res.json(registro);
@@ -27,10 +28,28 @@ const mostrarP = (req, res) =>{
     res.json([
     {
         'title': "prueba",
+        'daysOfWeek': ['5'],
+        'startTime': '10:45:00',
+        'endTime': '12:45:00',
+        'starRecur' : '2019-11-13',
+        'endRecur' : '2019-11-25',
         'description' : 'es una prueba olv',
-        'start' : "2019-11-13T00:00:00.000Z"
     }
     ])
+}
+
+const modificar = async (req, res) =>{
+    const { id }  = req.params;
+    await Reserva.update({
+        _id: id
+    }, req.body)
+    res.redirect('/obtener')
+}
+
+const mostrarMod = (req, res) =>{
+    Reserva.deleteMany({}, (err)=>{
+        res.status(200).send("F en el chat");
+    });
 }
 
 module.exports = {
@@ -38,5 +57,7 @@ module.exports = {
     registrarse,
     calendar,
     mostrar,
-    mostrarP
+    mostrarP,
+    modificar,
+    mostrarMod
 }

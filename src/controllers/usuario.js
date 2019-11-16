@@ -32,6 +32,14 @@ const perfil = (req, res) => {
     })
 }
 
+//MODIFICAR
+const modificar = (req, res) => {
+    const { id } = req.params;
+    await User.update({
+        _id: id
+    }, req.body.rol);
+}
+
 module.exports = {
     logout,
     inicio,

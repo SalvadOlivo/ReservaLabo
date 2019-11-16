@@ -26,25 +26,14 @@
             </nav>
         </header>
         <main>
-            <form action="/add" method="POST">
+            <form action="/modificar/<%= reserva._id %>" method="POST">
                 <h2>Reserva de Laboratorio</h2>
                 <div class="reserva container form-group">
                     <fieldset>
                         <div class="col-md-4 mb-3">
                             <label for="description"><b>Descripción: </b></label>
                             <textarea class="form-control" id="description" rows="3" name="description"
-                                required></textarea>
-
-                            <label for="name_lab"><b>Laboratorio: </b></label>
-                            <select name="name_lab" id="lab_choose" class="form-control" required>
-                                <option>Laboratorio 1</option>
-                                <option>Laboratorio 2</option>
-                                <option>Laboratorio 3</option>
-                                <option>Laboratorio 4</option>
-                                <option>Laboratorio 5</option>
-                                <option>Laboratorio 6</option>
-                                <option>Laboratorio 7</option>
-                            </select>
+                                required><%= reserva.descripcion %></textarea>
 
                             <label for="fecha_i"><b>Fecha inicio: </b></label>
                             <input class="form-control" type="date" name="fecha_i" required
@@ -66,30 +55,7 @@
                             <label for="numero_personas"><b>Numero de personas: </b></label>
                             <input class="form-control" type="number" min="1" name="numero_personas" required>
 
-                            <label for="repeticion"><b>Repetición: </b></label>
-                            <br>
-                            <form action="" class="form-group" id="campos_repetition">
-                                <label for="type_reserva"><b>Tipo: </b></label>
-                                <select name="type_reserva" id="type_reserva_choose" class="form-control">
-                                    <option>Diaria</option>
-                                    <option>Semanal</option>
-                                    <option>Mensual</option>
-                                </select>
-
-                                <label for="day_repetition"><b>Día: </b></label>
-                                <select name="day_repetition" id="day_reserva_choose" class="form-control">
-                                    <option>Lunes</option>
-                                    <option>Martes</option>
-                                    <option>Miércoles</option>
-                                    <option>Jueves</option>
-                                    <option>Viernes</option>
-                                    <option>Sábado</option>
-                                </select>
-
-                                <label for="date_ultimate"><b>Fecha Tope Repetición: </b></label>
-                                <input type="date" class="form-control" name="date_ultimate">
-                            </form>
-
+                            
                             <br>
                             <button class="btn btn-outline-success" type="submit">Guardar</button>
                         </div>

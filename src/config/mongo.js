@@ -1,10 +1,11 @@
 const  mongoose  = require('mongoose')
 
-let database = 'ReservaLabo'
+let database = 'ReservaLaboPrueba'
 let host = 'localhost'
 let port = '50451'
 let uri = `mongodb://${host}/${database}`
 
+mongoose.set('useFindAndModify', false);
 const connect = ()=>{
     mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
     .then( () => {

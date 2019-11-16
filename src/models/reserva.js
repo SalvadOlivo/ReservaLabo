@@ -5,7 +5,7 @@ const ReservaSchema = Mongoose.Schema({
   software: String,
   descripcion: String,
   tipo: String,
-  laboratorio: {  type: Mongoose.Schema.Types.ObjectId, ref: "laboratorio"},
+  //laboratorio: {  type: Mongoose.Schema.Types.ObjectId, ref: "laboratorio"},
   duracion: Number,
   responsable: {  type: Mongoose.Schema.Types.ObjectId, ref: "user"},
   estado: String,
@@ -15,7 +15,7 @@ const ReservaSchema = Mongoose.Schema({
   modificada_por: {  type: Mongoose.Schema.Types.ObjectId, ref: "user"},
   fecha_inicio : Date,
   fecha_fin : Date,
-  repeticion: {type: String, dia: String,fecha_tope: Date, numero_semana: Integer}
+  repeticion: {tipo: String, dia: String,fecha_tope: Date, numero_semana: Number}
 });
 
 
