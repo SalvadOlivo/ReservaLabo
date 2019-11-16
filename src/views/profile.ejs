@@ -21,6 +21,16 @@
                     <strong>id</strong> : <%= user._id %> <br>
                     <strong>nombre</strong> : <%= user.nombre %> <br>
                     <strong>rol</strong> : <%= user.rol %> <br>
+                    <label for="change_rol" class="only-admin"><b>Rol a cambiar:</b></label>
+                    <select name="change_rol" id="change_rol_choose" class="form-control only-admin">
+                      <option>Estudiante</option>
+                      <option>Invitado</option>
+                      <option>Profesor</option>
+                      <option>Mantenimiento</option>
+                      <option>Ordenanza</option>
+                      <option>Responsable</option>
+                  </select>
+                    <button class="only-admin btn btn-warning">Cambiar rol</button>
                     <strong>usuario</strong> : <%= user.username %> <br>
                     <strong>password</strong> : <%= user.password %>
                   </p>

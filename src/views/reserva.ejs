@@ -1,0 +1,89 @@
+<% include partials/head %>
+<link rel="stylesheet" href="css/style2.css">
+<title>Formulario</title>
+</head>
+
+<body>
+    <div class="reserva-content">
+        <header>
+            <nav>
+                <div id="navbarColor02">
+                    <ul>
+                        <li id="inicio">
+                            <a class="btn btn-danger" href="index.html">Inicio<span class="sr-only"></a>
+                        </li>
+
+                        <li id="user">
+                            <a class="btn btn-info" href="usuario.html">Usuario</a>
+                        </li>
+
+                        <li id="user">
+                            <a class="btn btn-info" href="/calendario">ver calendario</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </nav>
+        </header>
+        <main>
+
+            <h2>Reserva de Laboratorio</h2>
+            <div class="reserva container">
+
+                <p><b>Descripción: </b></p>
+                <p id="description_text"></p>
+                <br>
+                <p><b>Estado de la reserva: </b></p>
+                <p id="status_text"></p>
+                <br>
+                <p><b>Laboratorio: </b></p>
+                <p id="lab_text"></p>
+                <br>
+                <p><b>Fecha inicio: </b></p>
+                <p id="fecha_i_text"></p>
+                <br>
+                <p><b>Duración (cantidad de horas): </b>
+                <p id="duracion_text"></p>
+                <br>
+                <p><b>Fecha fin: </b></p>
+                <p id="fecha_f_text"></p>
+                <br>
+                <p><b>Tipo: </b></p>
+                <p id="tipo_reserva_text"></p>
+                <br>
+                <p><b>Creada por: </b></p>
+                <p id="create_text"></p>
+                <br>
+                <p><b>Modificada por: </b></p>
+                <p id="modificated_text"></p>
+                <br>
+                <p><b>Software requerido: </b></p>
+                <p id="software_text"></p>
+                <br>
+                <p><b>Numero de personas: </b></p>
+                <p id="num_personas_text"></p>
+                <br>
+                <p><b>Responsable (Catedrático o facilitador): </b></p>
+                <p id="responsable_text"></p>
+                <br>
+                <p><b>Repetición: </b></p>
+                
+                <p><b>Tipo: </b></p>
+                <p id="tipo_repetir_text"></p>
+                <br>
+                <p><b>Día: </b></p>
+                <p id="day_repetition_text"></p>
+                <br>
+                <p><b>Fecha Tope Repetición: </b></p>
+                <p id="fecha_tope_text"></p>
+                <br>
+                <br>
+                <button class="btn btn-primary" type="submit" id="btn-mod">Modificar</button>
+                <button class="btn btn-secondary" type="submit" id="btn-del">Eliminar</button>
+
+            </div>
+
+        </main>
+    </div>
+
+</body>

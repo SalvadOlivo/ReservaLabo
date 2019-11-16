@@ -35,6 +35,13 @@
                             <textarea class="form-control" id="description" rows="3" name="description"
                                 required></textarea>
 
+                            <label for="status" class="only-admin"><b>Estado de la reserva:</b></label>    
+                            <select name="status" id="status_choose" class="form-control only-admin" required>
+                                <option>Rechazada</option>
+                                <option>Aprobada</option>
+                                <option>Confirmada</option>                         
+                            </select>    
+
                             <label for="name_lab"><b>Laboratorio: </b></label>
                             <select name="name_lab" id="lab_choose" class="form-control" required>
                                 <option>Laboratorio 1</option>
@@ -63,11 +70,19 @@
                                 <option>Externa</option>
                             </select>
 
+                            <p class="only-admin"><b>Creada por: </b></p>
+                            <p id="create_text" class="only-admin"></p>
+                            <br class="only-admin">
+
                             <label for="software"><b>Software requerido: </b></label>
                             <input class="form-control" type="text" name="software" required>
 
                             <label for="numero_personas"><b>Numero de personas: </b></label>
                             <input class="form-control" type="number" min="1" name="numero_personas" required>
+
+                            <p class="only-admin"><b>Responsable (Catedrático o facilitador): </b></p>
+                            <p id="create_text" class="only-admin"></p>
+                            <br class="only-admin">
 
                             <label for="repeticion"><b>Repetición: </b></label>
                             <br>
@@ -89,12 +104,15 @@
                                     <option>Sábado</option>
                                 </select>
 
+                                <label for="num_semanas_repetition"><b>Número de semanas entre repetición: </b></label>
+                                <input type="number" class="form-group" min="1" name="num_semanas_repetition">
+
                                 <label for="date_ultimate"><b>Fecha Tope Repetición: </b></label>
                                 <input type="date" class="form-control" name="date_ultimate">
                             </form>
 
                             <br>
-                            <button class="btn btn-outline-success" type="submit">Guardar</button>
+                            <button class="btn btn-outline-success" type="submit">Guardar Cambios</button>
                         </div>
                     </fieldset>
                 </div>
