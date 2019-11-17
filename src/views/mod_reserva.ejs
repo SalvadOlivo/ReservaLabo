@@ -7,10 +7,10 @@
     <div class="container-content">
         <main>
             <form action="/modificar/<%=reserva._id%>" method="POST">
-                <h2>Reserva de Laboratorio</h2>
+                <h2 class="text-center">Reserva de Laboratorio</h2>
                 <div class="reserva container form-group">
                     <fieldset>
-                        <div class="col-md-4 mb-3">
+                        <div class="col-sm-6 mx-auto">
                             <textarea class = "form-control" type="text" name="modificada_por" style="display: none;"><%= user._id %></textarea>
                             <label for="descripcion"><b>Descripción: </b></label>
                             <textarea class="form-control" id="description" rows="3" name="descripcion"
@@ -55,8 +55,8 @@
                                     <% } %>
                             </select>
 
-                            <label for="tipo_de_reserva"><b>Creada por: </b></label>
-                            <input class="form-control" type="tex" name="creada_por" min="1" required value="<%= reserva.creada_por %>" disabled>
+                            <label for="tipo_de_reserva" style="display: none;"><b>Creada por: </b></label>
+                            <input class="form-control" type="tex" name="creada_por" min="1" required value="<%= reserva.creada_por %>" style="display: none;">
 
                             <label for="software"><b>Software requerido: </b></label>
                             <input class="form-control" type="text" name="software" required value="<%= reserva.software %>">
@@ -64,8 +64,8 @@
                             <label for="numero_personas"><b>Numero de personas: </b></label>
                             <input class="form-control" type="number" min="1" name="numero_personas" required value="<%= reserva.snumero_personas %>">
 
-                            <label for="tipo_de_reserva"><b>Responsable: </b></label>
-                            <input class="form-control" type="tex" name="creada_por" min="1" required value="<%= reserva.responsable %>" disabled>
+                            <label for="tipo_de_reserva" style="display: none;"><b>Responsable: </b></label>
+                            <input class="form-control" type="tex" name="creada_por" min="1" required value="<%= reserva.responsable %>" style="display: none;">
 
                             <div >
                                 <input type="checkbox" id="rep_switch">
