@@ -6,7 +6,7 @@
         <div class="container">
           <header class="text-center">
             <h1>Profile Page</h1>
-            <a href="/formulario" class="btn btn-light btn-sm">
+            <a href="/formulario/<%= user._id %>" class="btn btn-light btn-sm">
               Formulario
             </a>
           </header>
@@ -38,7 +38,7 @@
                       <table class="table table-bordered table-hover">
                           <thead>
                             <tr>
-                              <th>N</th>
+                              <th>id</th>
                               <th>Usuario</th>
                               <th>Rol</th>
                               <th>Edicion</th>
@@ -47,7 +47,7 @@
                           <tbody>
                             <% for(var i = 0; i < users.length; i++){ %>
                               <tr>
-                                  <td><%= i + 1 %></td>
+                                  <td><%= users[i]._id %></td>
                                   <td><%= users[i].username %></td>
                                   <td><%= users[i].rol %></td>
                                   <td>

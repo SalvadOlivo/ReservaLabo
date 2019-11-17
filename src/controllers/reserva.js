@@ -1,9 +1,17 @@
 const Reserva = require('../models/reserva')
+const User = require('../models/user')
+const Lab = require('../models/laboratorio')
 
 
 //FORMULARIO
-const inicio = (req, res) =>{
-    res.render('formulario');
+const inicio = async (req, res) =>{
+    const { id } = req.params;
+    const user = await User.findById(id);
+    const lab = await Lab.find();
+    res.render('formulario', {
+        user,
+        lab
+    });
 }
 
 //REGISTRARSE
@@ -18,12 +26,36 @@ const calendar = (req, res) =>{
     res.render('calendario');
 }
 
-const mostrar = (req, res) =>{
-    Reserva.find((err, registros) => {
-        if(err) return res.status(500).json({mensaje: "Error"})
-        return res.status(200).json(registros)
-    })
+const mostrar = async (req, res) =>{
+    await Reserva.find()
+    .populate({path: 'laboratorio'})
+    .exec((err, lab) => {
+        if(err){
+            res.status(500).send({mensaje: 'Error de conexion a la BD'})
+        }else{
+            User.populate(lab, {path: 'responsable'}, (err, docingreso) => {
+                if(err) {
+                    res.status(500).send({mensaje: 'Error en la peticion'})
+                }else{
+                    User.populate(docingreso,{path: 'creada_por'}, (err, final) => {
+                        if(err){
+                            res.status(500).send({mensaje: "F en el chat"})
+                        }else{
+                            User.populate(final, {path: 'modificada_por'}, (err, registros) => {
+                                if(err){
+                                    res.status(500).send("FF")
+                                }else{
+                                    res.status(200).send(registros)
+                                }
+                            });
+                        } 
+                    });
+                }
+            });
+        }
+    });
 }
+
 const mostrarP = (req, res) =>{
     res.json([
     {

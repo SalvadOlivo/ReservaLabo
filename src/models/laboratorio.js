@@ -2,8 +2,8 @@ const Mongoose = require("mongoose");
 
 const laboratorioSchema = Mongoose.Schema({
     nombre: String,
-    capacidad: Integer,
+    capacidad: Number,
     estado: Boolean
 });
 
-module.exports = Mongoose.model('laboratorio', laboratorioSchema);
+module.exports = Mongoose.model('Lab', laboratorioSchema);

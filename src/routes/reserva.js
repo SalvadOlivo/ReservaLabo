@@ -3,7 +3,7 @@ const router = express.Router();
 const reservaController = require('../controllers/reserva')
 
 
-router.get('/formulario', reservaController.inicio)
+router.get('/formulario/:id', reservaController.inicio)
 
 router.post('/add', reservaController.registrarse)
 

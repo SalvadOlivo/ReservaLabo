@@ -39,6 +39,7 @@ app.use(flash());
 //routes
 app.use('/', require('./routes/usuario'))
 app.use('/', require('./routes/reserva'))
+app.use('/', require('./routes/laboratorio'))
 
 //static files
 app.use(express.static(path.join(__dirname, '/public')))
