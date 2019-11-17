@@ -1,20 +1,25 @@
 <% include partials/head %>
 <title>Inicio</title>
-<link rel="stylesheet" href="/css/style2.css" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <div class="card text-center mt-5">
-            <div class="card-body">
-                <h1><span class="fa fa-lock"></span> Iniciar sesion o registrarse</h1>
-                <a href="/login" class="btn btn-light">
-                    <span class="fa fa-user"></span> Iniciar sesion
-                </a>
-                <a href="/signup" class="btn btn-light">
-                    <span class="fa fa-user"></span> Registrarse
-                </a>
-            </div>
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+        <a class="navbar-brand" href="/">INICIO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item">
+                    <a class="nav-link" href="/login"><i class="fa fa-user"></i> Iniciar Sesion </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/signup"><i class="fa fa-sign-in"></i>  Registrarse  </a>
+                </li>
+            </ul>
         </div>
-    </div>
+    </nav>
+    <!--/.Navbar -->
 </body>
 </html>

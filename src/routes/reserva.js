@@ -9,12 +9,12 @@ router.post('/add', reservaController.registrarse)
 
 router.get('/calendario', reservaController.calendar)
 
-router.get('/modificar/:id', reservaController.mostrarMod)
+router.get('/modificar/:id/:user', reservaController.mostrarEdit)
 
 router.post('/modificar/:id', reservaController.modificar)
 
-router.get('/obtener', reservaController.mostrar)
+router.get('/obtener/:id', reservaController.mostrarxUser)
 
-router.get('/obtenerP', reservaController.mostrarP)
+router.get('/obtener', reservaController.mostrar)
 
 module.exports = router;

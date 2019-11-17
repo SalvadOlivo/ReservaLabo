@@ -27,10 +27,15 @@ const registrarse = (req, res) =>{
 
 //PERFIL
 const perfil = async (req, res) => {
-    const usuarios = await User.find()
     res.render('profile', {
-        user: req.user,
-        users : usuarios
+        user: req.user
+    })
+}
+
+//USUARIO LOGEADO
+const logged = async (req, res) => {
+    res.render('user_log', {
+        user: req.user
     })
 }
 
@@ -41,7 +46,15 @@ const modificar = async (req, res) => {
     await User.update({
         _id: id
     }, req.body);
-    res.redirect('/');
+    res.redirect('/profile');
+}
+
+
+const verUsuarios = async (req, res) => {
+    const usuarios = await User.find()
+    res.render('ver_users', {
+        users : usuarios
+    })
 }
 
 const modView = async (req, res) => {
@@ -59,5 +72,6 @@ module.exports = {
     registrarse,
     perfil,
     modificar,
-    modView
+    modView,
+    logged
 }

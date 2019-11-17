@@ -1,6 +1,7 @@
 const Reserva = require('../models/reserva')
 const User = require('../models/user')
 const Lab = require('../models/laboratorio')
+const fetch = require('node-fetch')
 
 
 //FORMULARIO
@@ -19,7 +20,7 @@ const registrarse = async (req, res) =>{
     console.log(req.body)
     const registro = new Reserva(req.body);
     await registro.save();
-    res.json(registro);
+    res.redirect('/inicio')
 }
 
 const calendar = (req, res) =>{
@@ -27,7 +28,7 @@ const calendar = (req, res) =>{
 }
 
 const mostrar = async (req, res) =>{
-    await Reserva.find()
+    const reservas = await Reserva.find()
     .populate({path: 'laboratorio'})
     .exec((err, lab) => {
         if(err){
@@ -54,42 +55,49 @@ const mostrar = async (req, res) =>{
             });
         }
     });
+
+    
 }
 
-const mostrarP = (req, res) =>{
-    res.json([
-    {
-        'title': "prueba",
-        'daysOfWeek': ['5'],
-        'startTime': '10:45:00',
-        'endTime': '12:45:00',
-        'starRecur' : '2019-11-13',
-        'endRecur' : '2019-11-25',
-        'description' : 'es una prueba olv',
-    }
-    ])
+const mostrarxUser = async (req, res) =>{
+    const { id } = req.params;
+    const usuario_log = await User.findById(id);
+    const reservas = await Reserva.find();
+    res.render('reservas', {
+        reservas,
+        user: usuario_log
+    })
 }
 
 const modificar = async (req, res) =>{
     const { id }  = req.params;
+    const { id_user } = req.body.modificada_por
     await Reserva.update({
         _id: id
     }, req.body)
-    res.redirect('/obtener')
+    res.redirect(`/obtener/${id_user}`)
 }
 
-const mostrarMod = (req, res) =>{
-    Reserva.deleteMany({}, (err)=>{
-        res.status(200).send("F en el chat");
-    });
+const mostrarEdit = async (req, res) =>{
+    const { id, user } = req.params;
+    const reserva = await Reserva.findById(id);
+    const usuario = await User.findById(user);
+    const response = await fetch('http://localhost:3000/lab');
+    const labs = await response.json();
+    console.log(reserva)
+    res.render('mod_reserva', {
+        reserva,
+        user: usuario,
+        labs
+    })
 }
 
 module.exports = {
     inicio, 
     registrarse,
     calendar,
+    mostrarxUser,
     mostrar,
-    mostrarP,
     modificar,
-    mostrarMod
+    mostrarEdit
 }

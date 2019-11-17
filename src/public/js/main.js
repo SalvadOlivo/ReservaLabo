@@ -21,12 +21,6 @@ function afterDay(fecha){
   return new Date(fecha.getTime() + 24*60*60*1000);
 }
 
-function beforeDay(fecha){
-  return new Date(fecha.getTime() - 24*60*60*1000);
-}
-
-
-
 function obtenerEventos(calendar){
   var eventos = [] 
   fetch('/obtener', {
@@ -51,7 +45,6 @@ function obtenerEventos(calendar){
         else if(element.repeticion.tipo === 'semanal'){
           jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
         }
-
         jArray['startTime'] = fecha_inicio.toLocaleTimeString();
         jArray['endTime'] = '10:30'
         jArray['startRecur'] = obtenerFecha(fecha_inicio,1)

@@ -1,0 +1,54 @@
+<% include partials/head %>
+<title>Formulario</title>
+</head>
+<body>
+<% include partials/navbar %>
+    <div class="container">
+        <br>
+        <h1 class="text-center text-uppercase">Reservas</h1>
+        <hr>
+        <div class="container">
+            <div class = "row">
+                <div class="col-sm-6 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-uppercase"><i class="fa fa-folder-open"></i> Reservas </h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Titulo</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Borrar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                <% for(var i = 0, j = 0; i < reservas.length; i++) { %>
+                                    <tr>
+                                        <% if(user._id.equals(reservas[i].responsable) || user.rol == 'admin') {%>
+                                            <th scope="row"><%= j + 1 %></th>
+                                            <td><%= reservas[i].descripcion %></td>
+                                            <td><%= reservas[i].estado %></td>
+                                            <td>
+                                                <a href="/modificar/<%= reservas[i]._id %>/<%= user._id %>" class="btn btn-info"> Editar </a>
+                                            </td>
+                                            <td>
+                                                <a href="/delete/<%= reservas[i]._id %>" class="btn btn-danger"> Borrar </a>
+                                            </td>
+                                            <% j++ %>
+                                        <% } %>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/inicio.js"></script>
+</html>
