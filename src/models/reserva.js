@@ -10,7 +10,7 @@ const ReservaSchema = Mongoose.Schema({
   laboratorio: {  type: Mongoose.Schema.ObjectId, ref: "Lab"},
   duracion: Number,
   responsable: {  type: Mongoose.Schema.ObjectId, ref: "User"},
-  estado: String,
+  estado: {type : String, default: "Confirmada"},
   numero_personas: Number,
   ultima_modificacion: Date,
   creada_por: {  type:  Mongoose.Schema.ObjectId, ref: "User"},

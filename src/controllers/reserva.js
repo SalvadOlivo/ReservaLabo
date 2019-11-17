@@ -2,6 +2,7 @@ const Reserva = require('../models/reserva')
 const User = require('../models/user')
 const Lab = require('../models/laboratorio')
 const fetch = require('node-fetch')
+const sgMail = require('@sendgrid/mail');
 
 
 //FORMULARIO
@@ -15,10 +16,26 @@ const inicio = async (req, res) =>{
     });
 }
 
+//enviar correo
+const correo = (email, lab)=>{
+    sgMail.setApiKey('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');
+    const msg = {
+    to: `${email}`,
+    from: 'reservaLab@distribuidor.com',
+    subject: `Confirmacion de reserva de laboratorio ${lab}`,
+    text: `Correo que confirma la reserva del laboratorio ${lab}. Espere a que su solicitud de reserva sea aprobada`,
+    };
+    sgMail.send(msg);
+}
+
 //REGISTRARSE
 const registrarse = async (req, res) =>{
-    console.log(req.body)
+
+    const { idLab } = req.body.laboratorio;
+    const lab = await Lab.findById(req.body.laboratorio);
+    const user = await User.findById(req.body.creada_por);
     const registro = new Reserva(req.body);
+    correo(user.email, lab.nombre);
     await registro.save();
     res.redirect('/inicio')
 }
