@@ -17,10 +17,20 @@
                                 required><%= reserva.descripcion %></textarea>
 
                             <label for="status" class="only-admin"><b>Estado de la reserva:</b></label>    
-                            <select name="estado" id="status_choose" class="form-control only-admin" <%= user.rol == "admin" ? '' : disabled %> >
-                                <option>Rechazada</option>
-                                <option>Aprobada</option>
-                                <option>Confirmada</option>                         
+                            <select name="estado" class="form-control only-admin" <%= user.rol == "admin" ? '' : "disabled" %> >
+                                <% if(reserva.estado == "Confirmada") { %>
+                                    <option selected> <%= reserva.estado %> </option>
+                                    <option > Aprobada </option>
+                                    <option > Rechazada </option>
+                                <% } else if (reserva.estado == "Aprobada"){%>
+                                    <option selected> <%= reserva.estado %> </option>
+                                    <option > Confirmada </option>
+                                    <option > Rechazada </option>
+                                <% } else { %>  
+                                    <option selected> <%= reserva.estado %> </option>
+                                    <option > Confirmada </option>
+                                    <option > Aprobada </option>    
+                                <% } %>            
                             </select>    
                             <label for="lab"><b>Laboratorio: </b></label>
                             <select name="laboratorio" class="form-control">
@@ -32,17 +42,18 @@
                                     <% } %>
                                 <% } %>
                             </select>
-
+                            <% var fecha = new Date(reserva.fecha_inicio) %>
                             <label for="fecha_inicio"><b>Fecha inicio: </b></label>
-                            <input class="form-control" type="date" name="fecha_i" required
-                                pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<%= reserva.fecha_inicio %>">
+                            <input class="form-control" type="date" name="fecha_inicio" required
+                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate()) %>">
 
                             <label for="duracion"><b>Duración (cantidad de horas): </b></label>
                             <input class="form-control" type="number" name="duracion" min="1" required value="<%= reserva.duracion %>">
 
+                            <% var fecha = new Date(reserva.fecha_fin) %>
                             <label for="fecha_final"><b>Fecha fin: </b></label>
-                            <input class="form-control" type="date" name="fecha_f" required
-                                pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<%= reserva.fecha_fin %>">
+                            <input class="form-control" type="date" name="fecha_fin" required
+                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate()) %>">
 
                             <label for="tipo_de_reserva"><b>Tipo: </b></label>
                             <select name="tipo" id="type_reserva_choose" class="form-control">
@@ -62,10 +73,10 @@
                             <input class="form-control" type="text" name="software" required value="<%= reserva.software %>">
 
                             <label for="numero_personas"><b>Numero de personas: </b></label>
-                            <input class="form-control" type="number" min="1" name="numero_personas" required value="<%= reserva.snumero_personas %>">
+                            <input class="form-control" type="number" min="1" name="numero_personas" required value="<%= reserva.numero_personas %>">
 
                             <label for="tipo_de_reserva" style="display: none;"><b>Responsable: </b></label>
-                            <input class="form-control" type="tex" name="creada_por" min="1" required value="<%= reserva.responsable %>" style="display: none;">
+                            <input class="form-control" type="tex" name="responsable" min="1" required value="<%= reserva.responsable %>" style="display: none;">
 
                             <div >
                                 <input type="checkbox" id="rep_switch">
@@ -91,7 +102,7 @@
                                 </select>
 
                                 <label for="date_ultimate"><b>Fecha Tope Repetición: </b></label>
-                                <input type="date" class="form-control" name="fecha_tope">
+                                <input type="datetime-local" class="form-control" name="fecha_tope">
                             </div>
 
                             <br>

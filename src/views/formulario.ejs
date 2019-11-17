@@ -27,14 +27,14 @@
 
                             <label for="fecha_i"><b>Fecha inicio: </b></label>
                             <input class="form-control" type="date" name="fecha_inicio" required
-                                pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                                value= "<%= fecha_i %>">
 
                             <label for="duracion"><b>Duración (cantidad de horas): </b></label>
                             <input class="form-control" type="number" name="duracion" min="1" required>
 
                             <label for="fecha_f"><b>Fecha fin: </b></label>
                             <input class="form-control" type="date" name="fecha_fin" required
-                                pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+                            value= "<%= fecha_e %>">
 
                             <label for="tipo_de_reserva"><b>Tipo: </b></label>
                             <select name="tipo" id="type_reserva_choose" class="form-control">

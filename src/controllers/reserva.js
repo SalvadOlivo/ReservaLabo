@@ -7,12 +7,14 @@ const sgMail = require('@sendgrid/mail');
 
 //FORMULARIO
 const inicio = async (req, res) =>{
-    const { id } = req.params;
+    const { id, fecha_i, fecha_e } = req.params;
     const user = await User.findById(id);
     const lab = await Lab.find();
     res.render('formulario', {
         user,
-        lab
+        lab,
+        fecha_i,
+        fecha_e
     });
 }
 
@@ -30,8 +32,6 @@ const correo = (email, lab)=>{
 
 //REGISTRARSE
 const registrarse = async (req, res) =>{
-
-    const { idLab } = req.body.laboratorio;
     const lab = await Lab.findById(req.body.laboratorio);
     const user = await User.findById(req.body.creada_por);
     const registro = new Reserva(req.body);
@@ -90,8 +90,9 @@ const modificar = async (req, res) =>{
     const { id }  = req.params;
     await Reserva.update({
         _id: id
-    }, req.body)
-    res.redirect('/inicio')
+    }, req.body);
+    res.redirect('/inicio');
+    
 }
 
 const mostrarEdit = async (req, res) =>{
@@ -100,7 +101,6 @@ const mostrarEdit = async (req, res) =>{
     const usuario = await User.findById(user);
     const response = await fetch('http://localhost:3000/lab');
     const labs = await response.json();
-    console.log(reserva)
     res.render('mod_reserva', {
         reserva,
         user: usuario,

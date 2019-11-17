@@ -31,6 +31,7 @@ function obtenerEventos(calendar){
   .then(data => {
     data.forEach(element => {
       if(element.estado == "Aprobada"){
+        
         let fecha_inicio;
         let fecha_tope;
         if(element.repeticion.tipo_rep == "Ninguna"){
@@ -49,20 +50,20 @@ function obtenerEventos(calendar){
             jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
           }
           else if(element.repeticion.tipo === 'semanal'){
-            jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
+            jArray['daysOfWeek'] = [element.repeticion.dia]
           }
           jArray['startTime'] = fecha_inicio.toLocaleTimeString();
-          jArray['endTime'] = '10:30'
+          jArray['endTime'] = fecha_tope.toLocaleTimeString();
           jArray['startRecur'] = obtenerFecha(fecha_inicio,1)
           jArray['endRecur'] = obtenerFecha(fecha_tope)
           jArray['title'] = element.descripcion
           eventosS.push(jArray)
         }
-      }
-      if(bandera == false)
+        if(bandera == false)
         calendar.addEventSource(eventosS);
-      else{
-        calendar.addEvent(eventos)
+        else{
+          calendar.addEvent(eventos)
+        }
       }
     });
     
@@ -81,8 +82,18 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
+    select: function(info) {
+      if(document.getElementById("idUser") != null || document.getElementById("idUser") != undefined){
+        id = document.getElementById("idUser").value;
+        console.log(id)
+        window.location.href = `/formulario/${id}/${info.startStr}/${info.endStr}`
+      }else{
+        window.location.href = "/login"
+      }
+    },
     eventSource: [],
-    events: []
+    events: [],
+    selectable: true
   });
   obtenerEventos(calendar);
   calendar.render();

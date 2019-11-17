@@ -42,7 +42,6 @@ const logged = async (req, res) => {
 //MODIFICAR
 const modificar = async (req, res) => {
     const { id } = req.params;
-    console.log(req.body)
     await User.update({
         _id: id
     }, req.body);
@@ -52,8 +51,8 @@ const modificar = async (req, res) => {
 
 const mostrar = async (req, res) => {
     const { id } = req.params;
-    console.log(id)
     const usuarios = await User.find()
+    console.log(usuarios)
     const usuario_log = await User.findById(id);
     res.render('usuarios', {
         users : usuarios,
