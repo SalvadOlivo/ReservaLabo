@@ -10,6 +10,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
+require('dotenv').config()
+
 //connect to database
 const mongoDB = require('./config/mongo')
 mongoDB.connect();

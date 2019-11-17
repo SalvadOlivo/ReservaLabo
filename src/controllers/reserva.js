@@ -3,6 +3,7 @@ const User = require('../models/user')
 const Lab = require('../models/laboratorio')
 const fetch = require('node-fetch')
 const sgMail = require('@sendgrid/mail');
+require('dotenv').config()
 
 
 //FORMULARIO
@@ -20,7 +21,8 @@ const inicio = async (req, res) =>{
 
 //enviar correo
 const correo = (email, lab)=>{
-    sgMail.setApiKey('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');
+    console.log(process.env.SENDGRID_API_KEY)
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
     to: `${email}`,
     from: 'reservaLab@distribuidor.com',
