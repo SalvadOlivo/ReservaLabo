@@ -71,11 +71,10 @@ const mostrarxUser = async (req, res) =>{
 
 const modificar = async (req, res) =>{
     const { id }  = req.params;
-    const { id_user } = req.body.modificada_por
     await Reserva.update({
         _id: id
     }, req.body)
-    res.redirect(`/obtener/${id_user}`)
+    res.redirect('/inicio')
 }
 
 const mostrarEdit = async (req, res) =>{
@@ -92,6 +91,12 @@ const mostrarEdit = async (req, res) =>{
     })
 }
 
+const eliminar = async (req, res) =>{
+    const { id } = req.params;
+    await Reserva.remove({_id: id});
+    res.redirect('/inicio')
+}
+
 module.exports = {
     inicio, 
     registrarse,
@@ -99,5 +104,6 @@ module.exports = {
     mostrarxUser,
     mostrar,
     modificar,
-    mostrarEdit
+    mostrarEdit,
+    eliminar
 }

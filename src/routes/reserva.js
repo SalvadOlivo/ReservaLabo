@@ -17,4 +17,6 @@ router.get('/obtener/:id', reservaController.mostrarxUser)
 
 router.get('/obtener', reservaController.mostrar)
 
+router.get('/delete/:id', reservaController.eliminar)
+
 module.exports = router;
