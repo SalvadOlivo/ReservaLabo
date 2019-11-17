@@ -1,5 +1,3 @@
-
-
 function addZero(i){
   if (i < 10) {
     i = '0' + i;
@@ -7,9 +5,9 @@ function addZero(i){
   return i;
 }
 
-function obtenerFecha(fecha, days){
+function obtenerFecha(fecha){
   var hoy = new Date(fecha);
-  var dd = hoy.getDate() + days;
+  var dd = hoy.getDate();
   var mm = hoy.getMonth()+1;
   var yyyy = hoy.getFullYear();
 
@@ -22,7 +20,8 @@ function afterDay(fecha){
 }
 
 function obtenerEventos(calendar){
-  var eventos = [] 
+  var eventosS = []
+  var bandera = false
   fetch('/obtener', {
     method: 'GET'
   })
@@ -32,30 +31,41 @@ function obtenerEventos(calendar){
   .then(data => {
     data.forEach(element => {
       if(element.estado == "Aprobada"){
-        let fecha_inicio = new Date(element.fecha_inicio)
-        let fecha_tope = new Date(element.repeticion.fecha_tope)
-        console.log("FECHA-TOPE: ", fecha_tope)
-        console.log("FECHA-INICIO: ", fecha_inicio)
-
-        fecha_tope = afterDay(fecha_tope)
-        let jArray = {}
-        if(element.repeticion.tipo === 'diaria'){
-          jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
+        let fecha_inicio;
+        let fecha_tope;
+        if(element.repeticion.tipo_rep == "Ninguna"){
+          bandera = true;
+          fecha_inicio = new Date(element.fecha_inicio)
+          fecha_tope = afterDay(fecha_inicio)
+          var eventos = {}
+          eventos['title'] = element.descripcion;
+          eventos['start'] = fecha_inicio;
+        }else{
+          bandera = false;
+          fecha_inicio = new Date(element.fecha_inicio)
+          fecha_tope = new Date(element.fecha_tope)
+          let jArray = {}
+          if(element.repeticion.tipo === 'diaria'){
+            jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
+          }
+          else if(element.repeticion.tipo === 'semanal'){
+            jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
+          }
+          jArray['startTime'] = fecha_inicio.toLocaleTimeString();
+          jArray['endTime'] = '10:30'
+          jArray['startRecur'] = obtenerFecha(fecha_inicio,1)
+          jArray['endRecur'] = obtenerFecha(fecha_tope)
+          jArray['title'] = element.descripcion
+          eventosS.push(jArray)
         }
-        else if(element.repeticion.tipo === 'semanal'){
-          jArray['daysOfWeek'] = [(fecha_inicio.getDay() >= 0 && fecha_inicio.getDay() < 6) ? fecha_inicio.getDay()+1 : 0]
-        }
-        jArray['startTime'] = fecha_inicio.toLocaleTimeString();
-        jArray['endTime'] = '10:30'
-        jArray['startRecur'] = obtenerFecha(fecha_inicio,1)
-        jArray['endRecur'] = obtenerFecha(fecha_tope,0)
-        console.log('DAY: ', element.descripcion)
-        console.log(jArray['endRecur'])
-        jArray['title'] = element.descripcion
-        eventos.push(jArray)
+      }
+      if(bandera == false)
+        calendar.addEventSource(eventosS);
+      else{
+        calendar.addEvent(eventos)
       }
     });
-    calendar.addEventSource(eventos);
+    
   })
 }
 
@@ -67,11 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultView: 'dayGridMonth',
     defaultDate: obtenerFecha(new Date(), 0),
     header: {
-      left: 'prev,next today',
+      left: 'prev,today,next',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
     },
-    eventSource: []
+    eventSource: [],
+    events: []
   });
   obtenerEventos(calendar);
   calendar.render();
