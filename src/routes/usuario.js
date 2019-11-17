@@ -42,6 +42,9 @@ router.get('/edit/:id', usuarioController.modView)
 //actualizar el rol del usuario
 router.post('/edit/:id', usuarioController.modificar)
 
+//mostrar todos los usuarios
+router.get('/users/:id', usuarioController.mostrar)
+
 
 module.exports = router
 

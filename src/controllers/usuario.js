@@ -50,10 +50,14 @@ const modificar = async (req, res) => {
 }
 
 
-const verUsuarios = async (req, res) => {
+const mostrar = async (req, res) => {
+    const { id } = req.params;
+    console.log(id)
     const usuarios = await User.find()
-    res.render('ver_users', {
-        users : usuarios
+    const usuario_log = await User.findById(id);
+    res.render('usuarios', {
+        users : usuarios,
+        user: usuario_log
     })
 }
 
@@ -73,5 +77,6 @@ module.exports = {
     perfil,
     modificar,
     modView,
-    logged
+    logged,
+    mostrar
 }

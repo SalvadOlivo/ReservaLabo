@@ -63,10 +63,7 @@ const mostrarxUser = async (req, res) =>{
     const { id } = req.params;
     const usuario_log = await User.findById(id);
     const reservas = await Reserva.find();
-    res.render('reservas', {
-        reservas,
-        user: usuario_log
-    })
+    res.status(200).send(reservas)
 }
 
 const modificar = async (req, res) =>{

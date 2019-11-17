@@ -1,0 +1,48 @@
+<% include partials/head %>
+<title>Formulario</title>
+</head>
+<body>
+<% include partials/navbar %>
+    <div class="container">
+        <br>
+        <h1 class="text-center text-uppercase">Usuarios</h1>
+        <hr>
+        <div class="container">
+            <div class = "row">
+                <div class="col-sm-6 mx-auto">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title text-uppercase"><i class="fa fa-folder-open"></i> Usuarios</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Username</th>
+                                    <th scope="col">Rol</th>
+                                    <th scope="col">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <% for(var i = 0; i < users.length; i++) { %>
+                                    <tr>
+                                      <th scope="row"><%= i + 1 %></th>
+                                      <td><%= users[i].nombre %></td>
+                                      <td><%= users[i].username %></td>
+                                      <td><%= users[i].rol%></td>
+                                      <td>
+                                        <a href="/edit/<%= users[i]._id %>" class="btn btn-info"> Editar </a>
+                                      </td>
+                                    </tr>
+                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/inicio.js"></script>
+</html>
