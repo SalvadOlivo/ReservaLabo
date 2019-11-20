@@ -18,10 +18,10 @@ const inicio = async (req, res) =>{
         fecha_e
     });
 }
+//------------------------------------------------------------------------------------------------------------------------------------------
 
-//enviar correo
-const correo = (email, lab)=>{
-    console.log(process.env.SENDGRID_API_KEY)
+//correo de confirmacion usuario
+const correoConfirmar = (email, lab)=>{
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     const msg = {
     to: `${email}`,
@@ -32,12 +32,39 @@ const correo = (email, lab)=>{
     sgMail.send(msg);
 }
 
+//correo de confirmacion admin
+const correoConfirmarAdmin = (lab)=>{
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+    to: '00078217@uca.edu.sv',
+    from: 'reservaLab@distribuidor.com',
+    subject: `Nueva reserva de laboratorio ${lab}`,
+    text: `Correo que avisa que hay una nueva reserva del laboratorio ${lab}. Revisarla lo mas pronto posible`,
+    };
+    sgMail.send(msg);
+}
+
+//correo de aprobacion
+const correoAprobar = (email, lab)=>{
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+    to: `${email}`,
+    from: 'reservaLab@distribuidor.com',
+    subject: `Aprobacion de reserva de laboratorio ${lab}`,
+    text: `Correo que comunica la aprobacion de la reserva del laboratorio ${lab}.`,
+    };
+    sgMail.send(msg);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------------------
+
 //REGISTRARSE
 const registrarse = async (req, res) =>{
     const lab = await Lab.findById(req.body.laboratorio);
     const user = await User.findById(req.body.creada_por);
     const registro = new Reserva(req.body);
-    correo(user.email, lab.nombre);
+    correoConfirmar(user.email, lab.nombre);
+    correoConfirmarAdmin(lab.nombre);
     await registro.save();
     res.redirect('/inicio')
 }
@@ -90,6 +117,11 @@ const mostrarxUser = async (req, res) =>{
 
 const modificar = async (req, res) =>{
     const { id }  = req.params;
+    const usuario_log = await User.findById(req.body.creada_por);
+    const lab = await Lab.findById(req.body.laboratorio);
+    if(req.body.estado == "Aprobada"){
+        correoAprobar(usuario_log.email, lab.nombre);
+    }
     await Reserva.update({
         _id: id
     }, req.body);
@@ -101,8 +133,7 @@ const mostrarEdit = async (req, res) =>{
     const { id, user } = req.params;
     const reserva = await Reserva.findById(id);
     const usuario = await User.findById(user);
-    const response = await fetch('http://localhost:3000/lab');
-    const labs = await response.json();
+    const labs = await Lab.find();
     res.render('mod_reserva', {
         reserva,
         user: usuario,
