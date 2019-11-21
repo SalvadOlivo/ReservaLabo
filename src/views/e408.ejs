@@ -1,18 +1,19 @@
 <% include partials/head %>
+
 <!DOCTYPE html>
 <html lang=&quot;es&quot;>
-    <head>
+     <head>
 		<meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; />
 		<meta name=&quot;description&quot; content=&quot;Esta Tienda está desarrollada con PrestaShop&quot; />
         <link rel="stylesheet" href="/css/style_error.css">
         <title>Error 408</title>
-</head>
-<body class="content-error">
-
-    <div class="image_error e408"></div>
-    <error statusCode="408" path="error_408.html" />
-    <br>
-    <h3>Eso no debería haber pasado. La página que ha solicitado no existe.</h3>
-    <button type="button" class="btn btn-danger">Volver al Inicio</button>
-        
-</body>
+    </head>
+    <body>
+        <div class=&quot;container&quot;>
+            <h2><span>408</span>Tiempo agotado, demasiadas personas solicitando el mismo recurso.</h2>
+            <error statusCode="408" path="error_408.html" />
+            <p>¡Vaya! Algo salió mal.<br /><br />Trata de volver a cargar esta página.</p>
+            <button type="button" class="btn btn-danger">Volver al Inicio</button>
+        </div>
+    </body>
+</html>
