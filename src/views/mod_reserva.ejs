@@ -44,20 +44,14 @@
                             </select>
                             <% var fecha = new Date(reserva.fecha_inicio) %>
                             <label for="fecha_inicio"><b>Fecha inicio: </b></label>
-                            <input class="form-control" type="date" name="fecha_inicio" required
-                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate()) %>">
+                            <input class="form-control" type="datetime-local" name="fecha_inicio" required
+                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate())+'T'+(fecha.getHours())+':'+(fecha.getMinutes())+':'+(fecha.getSeconds())+'.'+(fecha.getTime())+'Z' %>">
 
-                            <label for="hora_inicio"><b>Hora inicio</b></label>
-                            <input class="form-control" type="time" name="hora_inicio" min="1" required value="<%= reserva.hora_inicio %>">
-
-                            <label for="hora_fin"><b>Hora fin </b></label>
-                            <input class="form-control" type="time" name="hora_fin" min="1" required value="<%= reserva.hora_fin %>">
-
-
+                            
                             <% var fecha = new Date(reserva.fecha_fin) %>
                             <label for="fecha_final"><b>Fecha fin: </b></label>
-                            <input class="form-control" type="date" name="fecha_fin" required
-                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate()) %>">
+                            <input class="form-control" type="datetime-local" name="fecha_fin" required
+                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate())+'T'+(fecha.getHours())+':'+(fecha.getMinutes())+':'+(fecha.getSeconds())+'.'+(fecha.getTime())+'Z' %>">
 
                             <label for="tipo_de_reserva"><b>Tipo: </b></label>
                             <select name="tipo" id="type_reserva_choose" class="form-control">
