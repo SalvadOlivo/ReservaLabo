@@ -47,8 +47,12 @@
                             <input class="form-control" type="date" name="fecha_inicio" required
                                 value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate()) %>">
 
-                            <label for="duracion"><b>Duración (cantidad de horas): </b></label>
-                            <input class="form-control" type="number" name="duracion" min="1" required value="<%= reserva.duracion %>">
+                            <label for="hora_inicio"><b>Hora inicio</b></label>
+                            <input class="form-control" type="time" name="hora_inicio" min="1" required value="<%= reserva.hora_inicio %>">
+
+                            <label for="hora_fin"><b>Hora fin </b></label>
+                            <input class="form-control" type="time" name="hora_fin" min="1" required value="<%= reserva.hora_fin %>">
+
 
                             <% var fecha = new Date(reserva.fecha_fin) %>
                             <label for="fecha_final"><b>Fecha fin: </b></label>

@@ -29,8 +29,12 @@
                             <input class="form-control" type="date" name="fecha_inicio" required
                                 value= "<%= fecha_i %>">
 
-                            <label for="duracion"><b>Duración (cantidad de horas): </b></label>
-                            <input class="form-control" type="number" name="duracion" min="1" required>
+                            <label for="hora_inicio"><b>Hora inicio: </b></label>
+                            <input class="form-control" type="time" name="hora_inicio" min="1" required>
+
+                            <label for="hora_fin"><b>Hora fin: </b></label>
+                            <input class="form-control" type="time" name="hora_fin" min="1" required>
+
 
                             <label for="fecha_f"><b>Fecha fin: </b></label>
                             <input class="form-control" type="date" name="fecha_fin" required
