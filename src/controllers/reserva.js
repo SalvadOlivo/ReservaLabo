@@ -78,19 +78,28 @@ const mostrar = async (req, res) =>{
     .populate({path: 'laboratorio'})
     .exec((err, lab) => {
         if(err){
-            res.status(500).send({mensaje: 'Error de conexion a la BD'})
+            //error de conexion a la DB
+            res.status(500).send({mensaje: 'Error de la conexion a la BD'})
+            //e500.ejs
+            //res.send(e500.ejs)
         }else{
             User.populate(lab, {path: 'responsable'}, (err, docingreso) => {
                 if(err) {
-                    res.status(500).send({mensaje: 'Error en la peticion'})
+                    //error con la peticion
+                    res.status(502).send({mensaje: 'Error con la peticion'})
+                    //e502.ejs
                 }else{
                     User.populate(docingreso,{path: 'creada_por'}, (err, final) => {
                         if(err){
-                            res.status(500).send({mensaje: "F en el chat"})
+                            //F en el chat
+                            res.status(500).send({mensaje: 'Error en el chat'})
+                            //e500.ejs
                         }else{
                             User.populate(final, {path: 'modificada_por'}, (err, registros) => {
                                 if(err){
-                                    res.status(500).send("FF")
+                                    //error El servicio esta temporalmente no disponible
+                                    res.status(503).send({mensaje: 'El servicio esta temporalmente no disponible'})
+                                    //e503.ejs
                                 }else{
                                     res.status(200).send(registros)
                                 }
