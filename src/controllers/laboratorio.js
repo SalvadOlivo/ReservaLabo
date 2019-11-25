@@ -1,11 +1,12 @@
 const Laboratorio = require('../models/laboratorio')
+const createError = require('http-errors');
 
 const mostrar = async (req, res) => {
     const registros = await Laboratorio.find()
     res.status(200).json(registros)
 }
 
-const mostrarUno = async (req, res) => {
+const mostrarUno = async (req, res, next) => {
     const { id } = req.params;
     const registros = await Laboratorio.findById(id)
     res.status(200).json(registros)

@@ -3,12 +3,15 @@ const User = require('../models/user')
 const Lab = require('../models/laboratorio')
 const fetch = require('node-fetch')
 const sgMail = require('@sendgrid/mail');
+const moment = require('moment')
+
 require('dotenv').config()
 
 
 //FORMULARIO
 const inicio = async (req, res) =>{
     const { id, fecha_i, fecha_e } = req.params;
+    console.log(fecha_e)
     const user = await User.findById(id);
     const lab = await Lab.find();
     res.render('formulario', {
@@ -62,6 +65,19 @@ const correoAprobar = (email, lab)=>{
 const registrarse = async (req, res) =>{
     const lab = await Lab.findById(req.body.laboratorio);
     const user = await User.findById(req.body.creada_por);
+    const response = await fetch('http://localhost:3000/obtener', {
+        method: 'GET'
+    })
+    const registros = await response.json();
+
+    registros.forEach(element => {
+        if(element.laboratorio._id == req.body.laboratorio){
+            if(moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio).format("YYYY-MM-DDThh:mm"),moment(element.fecha_fin).format("YYYY-MM-DDThh:mm"))){
+                console.log("FFFFFFFF")
+                res.redirect('/obtener')
+            }
+        }
+    });
     const registro = new Reserva(req.body);
     correoConfirmar(user.email, lab.nombre);
     correoConfirmarAdmin(lab.nombre);
@@ -101,7 +117,7 @@ const mostrar = async (req, res) =>{
                                     res.status(503).send({mensaje: 'El servicio esta temporalmente no disponible'})
                                     //e503.ejs
                                 }else{
-                                    res.status(200).send(registros)
+                                    res.status(200).json(registros)
                                 }
                             });
                         } 

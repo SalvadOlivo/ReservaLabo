@@ -52,7 +52,6 @@ const modificar = async (req, res) => {
 const mostrar = async (req, res) => {
     const { id } = req.params;
     const usuarios = await User.find()
-    console.log(usuarios)
     const usuario_log = await User.findById(id);
     res.render('usuarios', {
         users : usuarios,
