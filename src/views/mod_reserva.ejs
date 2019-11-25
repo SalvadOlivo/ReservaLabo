@@ -1,6 +1,7 @@
 <% include partials/head %>
 <script src="/js/formulario.js"></script>
 <title>Formulario</title>
+
 </head>
 <body>
     <% include partials/navbar %>
@@ -42,16 +43,16 @@
                                     <% } %>
                                 <% } %>
                             </select>
-                            <% var fecha = new Date(reserva.fecha_inicio) %>
+                            <% var fecha = moment(reserva.fecha_inicio).format('YYYY-MM-DDThh:mm') %>
                             <label for="fecha_inicio"><b>Fecha inicio: </b></label>
                             <input class="form-control" type="datetime-local" name="fecha_inicio" required
-                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate())+'T'+(fecha.getHours())+':'+(fecha.getMinutes())+':'+(fecha.getSeconds())+'.'+(fecha.getTime())%>">
+                                value="<%= fecha %>">
 
                             
-                            <% var fecha = new Date(reserva.fecha_fin) %>
+                            <% var fecha = moment(reserva.fecha_fin).format('YYYY-MM-DDThh:mm') %>
                             <label for="fecha_final"><b>Fecha fin: </b></label>
                             <input class="form-control" type="datetime-local" name="fecha_fin" required
-                                value="<%= (fecha.getFullYear())+'-'+(fecha.getMonth()+1)+'-'+(fecha.getDate())+'T'+(fecha.getHours())+':'+(fecha.getMinutes())+':'+(fecha.getSeconds())+'.'+(fecha.getTime()) %>">
+                                value="<%= fecha %>">
 
                             <label for="tipo_de_reserva"><b>Tipo: </b></label>
                             <select name="tipo" id="type_reserva_choose" class="form-control">

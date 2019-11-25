@@ -72,8 +72,6 @@ const registrarse = async (req, res) =>{
 
     registros.forEach(element => {
         var lab = element.laboratorio._id
-        console.log(element.laboratorio.capacidad)
-        console.log(req.body.numero_personas)
         if(req.body.laboratorio == lab){
             if((moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio),moment(element.fecha_fin)))
                 || moment(req.body.fecha_inicio).isSame(element.fecha_inicio)){
@@ -98,6 +96,7 @@ const registrarse = async (req, res) =>{
             }
         }
     });
+
     const registro = new Reserva(req.body);
     correoConfirmar(user.email, lab.nombre);
     correoConfirmarAdmin(lab.nombre);
@@ -174,12 +173,13 @@ const modificar = async (req, res) =>{
     await Reserva.update({
         _id: id
     }, req.body);
-    res.redirect(location.href);
+    res.redirect(`/obtener/${usuario_log}`);
     
 }
 
 const mostrarEdit = async (req, res) =>{
     const { id, user } = req.params;
+
     
     const reserva = await Reserva.findById(id);
     const usuario = await User.findById(user);
@@ -187,7 +187,8 @@ const mostrarEdit = async (req, res) =>{
     res.render('mod_reserva', {
         reserva,
         user: usuario,
-        labs
+        labs,
+        moment
     })
 }
 
