@@ -8,7 +8,7 @@ function addZero(i){
   return i;
 }
 
-function obtenerFecha(fecha, minu, hora){
+function obtenerFecha(fecha, hora, minu){
   var hoy = new Date(fecha);
   var dd = hoy.getDate();
   var mm = hoy.getMonth()+1;
@@ -26,7 +26,10 @@ function obtenerFecha(fecha, minu, hora){
 }
 
 function afterDay(fecha, hora, minu){
-  return obtenerFecha((fecha.getTime() + 24*60*60*1000), minu, hora);
+  return obtenerFecha((fecha.getTime() + 24*60*60*1000), hora, minu);
+}
+function beforeDay(fecha, hora, minu){
+  return obtenerFecha((fecha.getTime() - 24*60*60*1000), hora, minu);
 }
 
 function obtenerEventos(calendar){
@@ -46,7 +49,6 @@ function obtenerEventos(calendar){
         if(element.repeticion.tipo_rep == "Ninguna"){
           bandera = true;
           fecha_inicio = new Date(element.fecha_inicio)
-          fecha_tope = afterDay(fecha_inicio, 0, 0)
           var eventos = {}
           eventos['title'] = element.descripcion;
           eventos['start'] = fecha_inicio;
@@ -64,7 +66,7 @@ function obtenerEventos(calendar){
           jArray['startTime'] = fecha_inicio.toLocaleTimeString();
           jArray['endTime'] = fecha_tope.toLocaleTimeString();
           jArray['startRecur'] = obtenerFecha(fecha_inicio,0,0)
-          jArray['endRecur'] = obtenerFecha(fecha_tope, 0, 0)
+          jArray['endRecur'] = afterDay(fecha_tope, 0, 0)
           jArray['title'] = element.descripcion
           eventosS.push(jArray)
         }
@@ -85,7 +87,7 @@ var redireccionar = (info, tipo)=>{
       var id = document.getElementById("idUser").value;
       var end = info.endStr
       end = end.substring(0, 16)
-      end = obtenerFecha(end, 0, 0)
+      end = beforeDay(end, 0, 0)
       var inicio = obtenerFecha(info.startStr, 0 , 0)
       window.location.href = `/formulario/${id}&${inicio}&${end}`
     }else{
@@ -97,10 +99,10 @@ var redireccionar = (info, tipo)=>{
       var id = document.getElementById("idUser").value;
       var start = obtenerFecha(info.dateStr, 0, 0)
       if(regex.test(info.dateStr)){
-        var end = afterDay(new Date(info.dateStr), 0, 30)
+        var end = obtenerFecha(info.dateStr, 0, 30)
       }
       else{
-        var end = afterDay(new Date(info.dateStr), 1, 0)
+        var end = obtenerFecha(info.dateStr, 1, 0)
       }
       window.location.href = `/formulario/${id}&${start}&${end}`
     }else{

@@ -35,7 +35,7 @@
                                                 <a href="/modificar/<%= reservas[i]._id %>/<%= user._id %>" class="btn btn-info"> Editar </a>
                                             </td>
                                             <td>
-                                                <a href="/delete/<%= reservas[i]._id %>" class="btn btn-danger"> Borrar </a>
+                                                <a href="/delete/<%= user._id %>/<%= reservas[i]._id %>" class="btn btn-danger"> Borrar </a>
                                             </td>
                                             <% j++ %>
                                         <% } %>

@@ -71,10 +71,30 @@ const registrarse = async (req, res) =>{
     const registros = await response.json();
 
     registros.forEach(element => {
-        if(element.laboratorio._id == req.body.laboratorio){
-            if(moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio).format("YYYY-MM-DDThh:mm"),moment(element.fecha_fin).format("YYYY-MM-DDThh:mm"))){
-                console.log("FFFFFFFF")
-                res.redirect('/obtener')
+        var lab = element.laboratorio._id
+        console.log(element.laboratorio.capacidad)
+        console.log(req.body.numero_personas)
+        if(req.body.laboratorio == lab){
+            if((moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio),moment(element.fecha_fin)))
+                || moment(req.body.fecha_inicio).isSame(element.fecha_inicio)){
+                console.log(element.descripcion)
+                res.render('after_reserva', {
+                    message: {
+                        titulo: "Hubo un error al crear la reserva",
+                        cuerpo: `El laboratorio ${element.laboratorio.nombre} está ocupado en el horario establecido. Intente cambiando de laboratorio o de horario`
+                    },
+                    ok: false,
+                    user
+                })
+            }else if (element.laboratorio.capacidad < req.body.numero_personas){
+                res.render('after_reserva', {
+                    message: {
+                        titulo: "Hubo un error al crear la reserva",
+                        cuerpo: `La capacidad maxima del laboratorio ${element.laboratorio.nombre} se ve superada. Intente cambiando de laboratorio o disminuyendo la capacidad a reservar`
+                    },
+                    ok: false,
+                    user
+                })
             }
         }
     });
@@ -82,11 +102,14 @@ const registrarse = async (req, res) =>{
     correoConfirmar(user.email, lab.nombre);
     correoConfirmarAdmin(lab.nombre);
     await registro.save();
-    res.redirect('/inicio')
-}
-
-const calendar = (req, res) =>{
-    res.render('calendario');
+    res.render('after_reserva', {
+        message: {
+            titulo: "Reserva creada correctamente",
+            cuerpo: "Se le ha enviado un correo con la confirmacion de la reserva. Se le notificará cuando sea aprobada su reserva"
+        },
+        ok: true,
+        user
+    })
 }
 
 const mostrar = async (req, res) =>{
@@ -132,6 +155,7 @@ const mostrar = async (req, res) =>{
 
 const mostrarxUser = async (req, res) =>{
     const { id } = req.params;
+    console.log(req.params.id)
     const usuario_log = await User.findById(id);
     const reservas = await Reserva.find();
     res.render('reservas', {
@@ -150,12 +174,13 @@ const modificar = async (req, res) =>{
     await Reserva.update({
         _id: id
     }, req.body);
-    res.redirect('/inicio');
+    res.redirect(location.href);
     
 }
 
 const mostrarEdit = async (req, res) =>{
     const { id, user } = req.params;
+    
     const reserva = await Reserva.findById(id);
     const usuario = await User.findById(user);
     const labs = await Lab.find();
@@ -167,15 +192,14 @@ const mostrarEdit = async (req, res) =>{
 }
 
 const eliminar = async (req, res) =>{
-    const { id } = req.params;
+    const { user, id } = req.params;
     await Reserva.remove({_id: id});
-    res.redirect('/inicio')
+    res.redirect(`/obtener/${user}`)
 }
 
 module.exports = {
     inicio, 
     registrarse,
-    calendar,
     mostrarxUser,
     mostrar,
     modificar,

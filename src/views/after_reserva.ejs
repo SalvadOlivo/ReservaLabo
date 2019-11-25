@@ -1,0 +1,24 @@
+<% include partials/head %>
+<link rel="stylesheet" href="/css/mensaje.css">
+<title>Formulario</title>
+</head>
+<body>
+    <% include partials/navbar %>
+    <div class="container">
+        <div class="col-sm-6 mx-auto">
+            <% if (!ok) { %>
+                <div class="alert alert-danger">
+                    <h4 class="alert-heading"><%= message.titulo %></h4>
+                    <p><%= message.cuerpo %></p>
+                </div>
+            <% } else{ %>
+                <div class="alert alert-success">
+                    <h4 class="alert-heading"><%= message.titulo %></h4>
+                    <p><%= message.cuerpo %></p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+<script src="/js/inicio.js"></script>
+</html>
