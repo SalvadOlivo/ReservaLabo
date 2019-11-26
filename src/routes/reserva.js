@@ -7,6 +7,8 @@ router.get('/formulario/:id&:fecha_i&:fecha_e', reservaController.inicio)
 
 router.post('/add', reservaController.registrarse)
 
+router.get('/reserva/:id', reservaController.mostrarReserva)
+
 router.get('/modificar/:id/:user', reservaController.mostrarEdit)
 
 router.post('/modificar/:id', reservaController.modificar)

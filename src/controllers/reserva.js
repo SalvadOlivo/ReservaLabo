@@ -196,6 +196,20 @@ const eliminar = async (req, res) =>{
     res.redirect(`/obtener/${user}`)
 }
 
+const mostrarReserva = async (req, res) => {
+    const { id } = req.params;
+    const response = await fetch('http://localhost:3000/obtener', {
+        method: 'GET'
+    })
+    const registros = await response.json();
+    registros.forEach(element => {
+        if(element._id == id)
+            res.render('ver_reserva', {
+                reserva: element
+            });
+    });
+}
+
 module.exports = {
     inicio, 
     registrarse,
@@ -203,5 +217,6 @@ module.exports = {
     mostrar,
     modificar,
     mostrarEdit,
+    mostrarReserva,
     eliminar
 }

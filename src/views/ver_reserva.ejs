@@ -1,0 +1,45 @@
+<% include partials/head %>
+<title>Perfil</title>
+</head>
+<body>
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
+        <a class="navbar-brand" href="/">INICIO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <!--/.Navbar -->
+  <div class="container">
+    <br>
+    <h1 class="text-center text-uppercase">Reserva</h1>
+    <hr>
+    <div class="container">
+      <div class = "row">
+        <div class="col-sm-6 mx-auto">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title text-uppercase"><span class="fa fa-info-circle"></span> detalles</h3>
+              <p class="text-uppercase">
+                <strong>laboratorio</strong> : <%= reserva.laboratorio.nombre %> <br>
+                <strong>descripcion </strong> : <%= reserva.descripcion %> <br>
+                <strong>fecha de inicio </strong> : <%= reserva.fecha_inicio %> <br>
+                <strong>fecha de fin </strong> : <%= reserva.fecha_fin %> <br>
+                <strong>creada por </strong> : <%= reserva.creada_por.username %> <br>
+                <strong>responsable </strong> : <%= reserva.responsable.username %> <br>
+                <strong>estado</strong> : <%= reserva.estado %> <br>
+                <strong>repeticion</strong> : <%= reserva.repeticion.tipo_rep %> <br>
+                <strong>tipo</strong> : <%= reserva.tipo %> <br>
+                <strong>software</strong> : <%= reserva.software %> <br>
+                <strong>numero de personas</strong> : <%= reserva.numero_personas %> <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/js/inicio.js"></script>
+</html>

@@ -55,6 +55,7 @@ function obtenerEventos(calendar){
           console.log(fecha_inicio)
           eventos['title'] = element.laboratorio.nombre;
           eventos['start'] = fecha_inicio
+          eventos['url'] = `/reserva/${element._id}`;
         }else{
           bandera = false;
           fecha_inicio = element.fecha_inicio
@@ -66,11 +67,13 @@ function obtenerEventos(calendar){
           else if(element.repeticion.tipo === 'semanal'){
             jArray['daysOfWeek'] = [element.repeticion.dia]
           }
+          jArray['id'] = element._id;
           jArray['startTime'] = fecha_inicio.substring(11,16)
           jArray['endTime'] = fecha_tope.substring(11,16)
           jArray['startRecur'] = fecha_inicio.substring(0,11)
           jArray['endRecur'] = fecha_tope.substring(0,11)
           jArray['title'] = element.laboratorio.nombre
+          eventos['url'] = `/reserva/${element._id}`;
           eventosS.push(jArray)
         }
         if(bandera == false)
@@ -94,14 +97,12 @@ var redireccionar = (info, tipo)=>{
       var inicio = afterDay(new Date(info.startStr), 0 , 0)
       window.location.href = `/formulario/${id}&${inicio}&${end}`
     }else{
-      console.log('casi')
       window.location.href = "/login"
     }
   }else{
     if(document.getElementById("idUser") != null || document.getElementById("idUser") != undefined){
       var id = document.getElementById("idUser").value;
       var start = afterDay(info.dateStr, 0, 0)
-      alert(start)
       if(regex.test(info.dateStr)){
         var end = afterDay(info.dateStr, 0, 30)
       }
@@ -126,6 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
       left: 'prev,today,next',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    },
+    eventClick: function(info) {
     },
     dateClick: function(info) {
       redireccionar(info, "click")
