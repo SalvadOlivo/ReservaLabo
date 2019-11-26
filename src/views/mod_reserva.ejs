@@ -43,16 +43,12 @@
                                     <% } %>
                                 <% } %>
                             </select>
-                            <% var fecha = moment(reserva.fecha_inicio).format('YYYY-MM-DDThh:mm') %>
                             <label for="fecha_inicio"><b>Fecha inicio: </b></label>
                             <input class="form-control" type="datetime-local" name="fecha_inicio" required
-                                value="<%= fecha %>">
-
-                            
-                            <% var fecha = moment(reserva.fecha_fin).format('YYYY-MM-DDThh:mm') %>
+                                value="<%= reserva.fecha_inicio %>">
                             <label for="fecha_final"><b>Fecha fin: </b></label>
                             <input class="form-control" type="datetime-local" name="fecha_fin" required
-                                value="<%= fecha %>">
+                                value="<%= reserva.fecha_fin %>">
 
                             <label for="tipo_de_reserva"><b>Tipo: </b></label>
                             <select name="tipo" id="type_reserva_choose" class="form-control">

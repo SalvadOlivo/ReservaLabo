@@ -69,13 +69,13 @@ const registrarse = async (req, res) =>{
         method: 'GET'
     })
     const registros = await response.json();
+    console.log(req.body.fecha_inicio)
 
     registros.forEach(element => {
         var lab = element.laboratorio._id
         if(req.body.laboratorio == lab){
             if((moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio),moment(element.fecha_fin)))
                 || moment(req.body.fecha_inicio).isSame(element.fecha_inicio)){
-                console.log(element.descripcion)
                 res.render('after_reserva', {
                     message: {
                         titulo: "Hubo un error al crear la reserva",
@@ -173,14 +173,12 @@ const modificar = async (req, res) =>{
     await Reserva.update({
         _id: id
     }, req.body);
-    res.redirect(`/obtener/${usuario_log}`);
+    res.redirect(`/obtener/${req.body.creada_por}`);
     
 }
 
 const mostrarEdit = async (req, res) =>{
     const { id, user } = req.params;
-
-    
     const reserva = await Reserva.findById(id);
     const usuario = await User.findById(user);
     const labs = await Lab.find();

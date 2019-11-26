@@ -1,4 +1,6 @@
+
 var regex = new RegExp('[T]')
+
 
 
 function addZero(i){
@@ -48,14 +50,15 @@ function obtenerEventos(calendar){
         let fecha_tope;
         if(element.repeticion.tipo_rep == "Ninguna"){
           bandera = true;
-          fecha_inicio = new Date(element.fecha_inicio)
+          fecha_inicio = element.fecha_inicio
           var eventos = {}
-          eventos['title'] = element.descripcion;
-          eventos['start'] = fecha_inicio;
+          console.log(fecha_inicio)
+          eventos['title'] = element.laboratorio.nombre;
+          eventos['start'] = fecha_inicio
         }else{
           bandera = false;
-          fecha_inicio = new Date(element.fecha_inicio)
-          fecha_tope = new Date(element.fecha_tope)
+          fecha_inicio = element.fecha_inicio
+          fecha_tope = element.fecha_tope
           let jArray = {}
           if(element.repeticion.tipo === 'diaria'){
             jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
@@ -63,11 +66,11 @@ function obtenerEventos(calendar){
           else if(element.repeticion.tipo === 'semanal'){
             jArray['daysOfWeek'] = [element.repeticion.dia]
           }
-          jArray['startTime'] = fecha_inicio.toLocaleTimeString();
-          jArray['endTime'] = fecha_tope.toLocaleTimeString();
-          jArray['startRecur'] = obtenerFecha(fecha_inicio,0,0)
-          jArray['endRecur'] = afterDay(fecha_tope, 0, 0)
-          jArray['title'] = element.descripcion
+          jArray['startTime'] = fecha_inicio.substring(11,16)
+          jArray['endTime'] = fecha_tope.substring(11,16)
+          jArray['startRecur'] = fecha_inicio.substring(0,11)
+          jArray['endRecur'] = fecha_tope.substring(0,11)
+          jArray['title'] = element.laboratorio.nombre
           eventosS.push(jArray)
         }
         if(bandera == false)
@@ -82,13 +85,13 @@ function obtenerEventos(calendar){
 }
 
 var redireccionar = (info, tipo)=>{
-  if((tipo === 'select' && regex.test(info.endStr)) || (tipo === 'select')){
+  if(tipo === 'select'){
     if(document.getElementById("idUser") != null || document.getElementById("idUser") != undefined){
       var id = document.getElementById("idUser").value;
       var end = info.endStr
       end = end.substring(0, 16)
-      end = beforeDay(end, 0, 0)
-      var inicio = obtenerFecha(info.startStr, 0 , 0)
+      end = obtenerFecha(end, 1, 0)
+      var inicio = afterDay(new Date(info.startStr), 0 , 0)
       window.location.href = `/formulario/${id}&${inicio}&${end}`
     }else{
       console.log('casi')
@@ -97,18 +100,18 @@ var redireccionar = (info, tipo)=>{
   }else{
     if(document.getElementById("idUser") != null || document.getElementById("idUser") != undefined){
       var id = document.getElementById("idUser").value;
-      var start = obtenerFecha(info.dateStr, 0, 0)
+      var start = afterDay(info.dateStr, 0, 0)
+      alert(start)
       if(regex.test(info.dateStr)){
-        var end = obtenerFecha(info.dateStr, 0, 30)
+        var end = afterDay(info.dateStr, 0, 30)
       }
       else{
-        var end = obtenerFecha(info.dateStr, 1, 0)
+        var end = afterDay(info.dateStr, 1, 0)
       }
       window.location.href = `/formulario/${id}&${start}&${end}`
     }else{
       window.location.href = "/login"
     }
-    
   }
 }
 

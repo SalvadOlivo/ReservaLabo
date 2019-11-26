@@ -14,18 +14,17 @@ const ReservaSchema = Mongoose.Schema({
     default: 'Confirmada'
   },
   numero_personas: Number,
-  ultima_modificacion: Date,
   creada_por: {  type:  Mongoose.Schema.ObjectId, ref: "User"},
   modificada_por: {  type:  Mongoose.Schema.ObjectId, ref: "User"},
-  fecha_inicio : Date,
-  fecha_fin : Date,
+  fecha_inicio : String,
+  fecha_fin : String,
   repeticion: {
     tipo_rep: {
       type: String,
       default: "Ninguna"
     },
     dia: Number,
-    fecha_tope: Date
+    fecha_tope: String
   }
 });
 
