@@ -192,18 +192,23 @@ const mostrarxUser = async (req, res) =>{
 
 const modificar = async (req, res) =>{
     const { id }  = req.params;
+    var estadoL = "Confirmada"
     const usuario_log = await User.findById(req.body.creada_por);
     const lab = await Lab.findById(req.body.laboratorio);
     if(req.body.estado == "Aprobada"){
         correoAprobar(usuario_log.email, lab.nombre);
     }
+    if(req.body.estado){
+        estadoL = req.body.estado
+    }
+    console.log(req.body.estado)
     await Reserva.update({
         _id: id
     }, {
         software: req.body.software,
         descripcion: req.body.descripcion,
         tipo: req.body.tipo,
-        estado: req.body.estado,
+        estado: estadoL,
         laboratorio: req.body.laboratorio,
         numero_personas: req.body.numero_personas,
         creada_por: req.body.creada_por,
