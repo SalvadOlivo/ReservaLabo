@@ -69,7 +69,11 @@ const registrarse = async (req, res) =>{
     const response = await fetch('https://proyecto-web-2019.herokuapp.com/obtener', {
         method: 'GET'
     })
+    const responselab = await fetch('https://proyecto-web-2019.herokuapp.com/lab', {
+        method: 'GET'
+    })
     const registros = await response.json();
+    const labs = await responselab.json();
 
     registros.forEach(element => {
         var lab = element.laboratorio._id
@@ -85,19 +89,22 @@ const registrarse = async (req, res) =>{
                     ok: false,
                     user
                 })
-            }else if (element.laboratorio.capacidad < req.body.numero_personas){
-                bandera = false
-                res.render('after_reserva', {
-                    message: {
-                        titulo: "Hubo un error al crear la reserva",
-                        cuerpo: `La capacidad maxima del laboratorio ${element.laboratorio.nombre} se ve superada. Intente cambiando de laboratorio o disminuyendo la capacidad a reservar`
-                    },
-                    ok: false,
-                    user
-                })
             }
         }
     });
+    labs.forEach(element => {
+        if (element.capacidad < req.body.numero_personas){
+            bandera = false
+            res.render('after_reserva', {
+                message: {
+                    titulo: "Hubo un error al crear la reserva",
+                    cuerpo: `La capacidad maxima del laboratorio ${element.nombre} se ve superada. Intente cambiando de laboratorio o disminuyendo la capacidad a reservar`
+                },
+                ok: false,
+                user
+            })
+        }
+    })
 
     const registro = new Reserva({
         software: req.body.software,
