@@ -217,7 +217,7 @@ const modificar = async (req, res) =>{
             fecha_tope: req.body.fecha_tope
         }
     });
-    res.redirect(`/obtener/${req.body.creada_por}`);
+    res.redirect(`/obtener/${req.body.modificada_por}`);
     
 }
 
