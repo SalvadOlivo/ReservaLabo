@@ -56,24 +56,25 @@ function obtenerEventos(calendar){
           eventos['title'] = element.laboratorio.nombre;
           eventos['start'] = fecha_inicio
           eventos['url'] = `/reserva/${element._id}`;
+          eventos['color'] = '#007c91';
         }else{
           bandera = false;
           fecha_inicio = element.fecha_inicio
-          fecha_tope = element.fecha_tope
+          fecha_tope = afterDay(new Date(element.repeticion.fecha_tope),0,0)
           let jArray = {}
-          if(element.repeticion.tipo === 'diaria'){
+          if(element.repeticion.tipo_rep === 'Diaria'){
             jArray['daysOfWeek'] = ['1', '2', '3', '4', '5']
           }
-          else if(element.repeticion.tipo === 'semanal'){
+          else{
             jArray['daysOfWeek'] = [element.repeticion.dia]
           }
-          jArray['id'] = element._id;
           jArray['startTime'] = fecha_inicio.substring(11,16)
           jArray['endTime'] = fecha_tope.substring(11,16)
-          jArray['startRecur'] = fecha_inicio.substring(0,11)
-          jArray['endRecur'] = fecha_tope.substring(0,11)
+          jArray['startRecur'] = fecha_inicio.substring(0,10)
+          jArray['endRecur'] = fecha_tope.substring(0,10)
           jArray['title'] = element.laboratorio.nombre
-          eventos['url'] = `/reserva/${element._id}`;
+          jArray['url'] = `/reserva/${element._id}`;
+          jArray['color'] = 'green'
           eventosS.push(jArray)
         }
         if(bandera == false)

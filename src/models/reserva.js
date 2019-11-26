@@ -26,7 +26,8 @@ const ReservaSchema = Mongoose.Schema({
     dia: Number,
     fecha_tope: String
   }
+},{
+  timestamps: true
 });
 
-
-(module.exports = Mongoose.model("Reserva", ReservaSchema))
+module.exports = Mongoose.model("Reserva", ReservaSchema)

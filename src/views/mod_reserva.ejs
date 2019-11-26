@@ -74,15 +74,31 @@
                             <input class="form-control" type="tex" name="responsable" min="1" required value="<%= reserva.responsable %>" style="display: none;">
 
                             <div >
-                                <input type="checkbox" id="rep_switch">
-                                <label for="late_switch">Repeticion: </label>
+                                <%if(reserva.repeticion.tipo_rep != "Ninguna"){ %>
+                                    <input type="checkbox" id="rep_switch" checked>
+                                    <label for="late_switch">Repeticion: </label>
+                                <%} else {%>
+                                    <input type="checkbox" id="rep_switch">
+                                    <label for="late_switch">Repeticion: </label>
+                                <% } %>
                             </div>
 
                             <div class="form-group" id="rep_F">
                                 <label for="type_repetition_reserva"><b>Tipo: </b></label>
                                 <select name="tipo_rep" id="type_repetition_choose" class="form-control">
-                                    <option>Diaria</option>
-                                    <option>Semanal</option>
+                                    <%if(reserva.repeticion.tipo_rep == "Diaria"){%>
+                                        <option selected>Diaria</option>
+                                        <option>Semanal</option>
+                                        <option>Ninguna</option>
+                                    <%} else if(reserva.repeticion.tipo_rep == "Semanal"){%>
+                                        <option>Diaria</option>
+                                        <option selected>Semanal</option>
+                                        <option>Ninguna</option>
+                                    <% }else {%>
+                                        <option>Diaria</option>
+                                        <option>Semanal</option>
+                                        <option selected>Ninguna</option>
+                                    <% } %>
                                 </select>
 
                                 <label for="dia"><b>Día: </b></label>
@@ -97,7 +113,7 @@
                                 </select>
 
                                 <label for="date_ultimate"><b>Fecha Tope Repetición: </b></label>
-                                <input type="datetime-local" class="form-control" name="fecha_tope">
+                                <input type="datetime-local" class="form-control" name="fecha_tope" value="<%= reserva.repeticion.fecha_tope%>">
                             </div>
 
                             <br>

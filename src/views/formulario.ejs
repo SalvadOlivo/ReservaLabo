@@ -52,10 +52,10 @@
                             <div class="form-group" id="rep_F">
                                 <label for="type_repetition_reserva"><b>Tipo: </b></label>
                                 <select name="tipo_rep" id="type_repetition_choose" class="form-control">
+                                    <option>Ninguna</option>
                                     <option>Diaria</option>
                                     <option>Semanal</option>
                                 </select>
-
                                 <label for="dia"><b>Día: </b></label>
                                 <select name="dia" id="day_reserva_choose" class="form-control">
                                     <option value="1">Lunes</option>
@@ -68,7 +68,7 @@
                                 </select>
 
                                 <label for="date_ultimate"><b>Fecha Tope Repetición: </b></label>
-                                <input type="date" class="form-control" name="fecha_tope">
+                                <input type="datetime-local" class="form-control" name="fecha_tope" value="<%= fecha_e %>">
                             </div>
                             <br>
                             <button class="btn btn-outline-success" type="submit">Guardar</button>

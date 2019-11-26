@@ -65,17 +65,18 @@ const correoAprobar = (email, lab)=>{
 const registrarse = async (req, res) =>{
     const lab = await Lab.findById(req.body.laboratorio);
     const user = await User.findById(req.body.creada_por);
+    var bandera = true;
     const response = await fetch('http://localhost:3000/obtener', {
         method: 'GET'
     })
     const registros = await response.json();
-    console.log(req.body.fecha_inicio)
 
     registros.forEach(element => {
         var lab = element.laboratorio._id
         if(req.body.laboratorio == lab){
             if((moment(req.body.fecha_inicio).isBetween(moment(element.fecha_inicio),moment(element.fecha_fin)))
                 || moment(req.body.fecha_inicio).isSame(element.fecha_inicio)){
+                    bandera = false;
                 res.render('after_reserva', {
                     message: {
                         titulo: "Hubo un error al crear la reserva",
@@ -85,6 +86,7 @@ const registrarse = async (req, res) =>{
                     user
                 })
             }else if (element.laboratorio.capacidad < req.body.numero_personas){
+                bandera = false
                 res.render('after_reserva', {
                     message: {
                         titulo: "Hubo un error al crear la reserva",
@@ -97,18 +99,36 @@ const registrarse = async (req, res) =>{
         }
     });
 
-    const registro = new Reserva(req.body);
-    correoConfirmar(user.email, lab.nombre);
-    correoConfirmarAdmin(lab.nombre);
-    await registro.save();
-    res.render('after_reserva', {
-        message: {
-            titulo: "Reserva creada correctamente",
-            cuerpo: "Se le ha enviado un correo con la confirmacion de la reserva. Se le notificará cuando sea aprobada su reserva"
-        },
-        ok: true,
-        user
-    })
+    const registro = new Reserva({
+        software: req.body.software,
+        descripcion: req.body.descripcion,
+        tipo: req.body.tipo,
+        laboratorio: req.body.laboratorio,
+        numero_personas: req.body.numero_personas,
+        creada_por: req.body.creada_por,
+        fecha_inicio: req.body.fecha_inicio,
+        fecha_fin: req.body.fecha_fin,
+        responsable: req.body.responsable,
+        repeticion: {
+            tipo_rep: req.body.tipo_rep,
+            dia: req.body.dia,
+            fecha_tope: req.body.fecha_tope
+        }
+    });
+    
+    if(bandera){
+        correoConfirmar(user.email, lab.nombre);
+        correoConfirmarAdmin(lab.nombre);
+        await registro.save();
+        res.render('after_reserva', {
+            message: {
+                titulo: "Reserva creada correctamente",
+                cuerpo: "Se le ha enviado un correo con la confirmacion de la reserva. Se le notificará cuando sea aprobada su reserva"
+            },
+            ok: true,
+            user
+        })
+    }  
 }
 
 const mostrar = async (req, res) =>{
@@ -172,7 +192,24 @@ const modificar = async (req, res) =>{
     }
     await Reserva.update({
         _id: id
-    }, req.body);
+    }, {
+        software: req.body.software,
+        descripcion: req.body.descripcion,
+        tipo: req.body.tipo,
+        estado: req.body.estado,
+        laboratorio: req.body.laboratorio,
+        numero_personas: req.body.numero_personas,
+        creada_por: req.body.creada_por,
+        responsable: req.body.responsable,
+        modificada_por: req.body.modificada_por,
+        fecha_inicio: req.body.fecha_inicio,
+        fecha_fin: req.body.fecha_fin,
+        repeticion: {
+            tipo_rep: req.body.tipo_rep,
+            dia: req.body.dia,
+            fecha_tope: req.body.fecha_tope
+        }
+    });
     res.redirect(`/obtener/${req.body.creada_por}`);
     
 }
