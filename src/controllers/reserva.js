@@ -93,7 +93,7 @@ const registrarse = async (req, res) =>{
         }
     });
     labs.forEach(element => {
-        if (element.capacidad < req.body.numero_personas){
+        if (element._id == req.body.laboratorio && element.capacidad < req.body.numero_personas){
             bandera = false
             res.render('after_reserva', {
                 message: {
