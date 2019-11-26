@@ -16,7 +16,7 @@ router.post('/modificar/:id', reservaController.modificar)
 
 router.get('/obtener/:id', Auth.isAuthentication, reservaController.mostrarxUser)
 
-router.get('/obtener',Auth.isAuthentication, reservaController.mostrar)
+router.get('/obtener', reservaController.mostrar)
 
 router.get('/delete/:user/:id',Auth.isAuthentication, reservaController.eliminar)
 
