@@ -2,6 +2,7 @@ const Mongoose = require("mongoose");
 const User = require('./user')
 const Lab = require('./laboratorio')
 
+
 const ReservaSchema = Mongoose.Schema({
 
   software: String,

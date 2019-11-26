@@ -8,7 +8,7 @@ const passport = require('passport');
 router.get('/', Auth.isAuthenticationIndex, usuarioController.inicio)
 
 //vista de login
-router.get('/login', usuarioController.sesion)
+router.get('/login', Auth.isAuthenticationIndex, usuarioController.sesion)
 
 //verificar el inicio de sesion
 router.post('/login', passport.authenticate('sesion-local', {
@@ -18,7 +18,7 @@ router.post('/login', passport.authenticate('sesion-local', {
 }));
 
 //vista de registro
-router.get('/signup', usuarioController.registrarse)
+router.get('/signup', Auth.isAuthenticationIndex, usuarioController.registrarse)
 
 //verificar que sean validos los datos al registrarse
 router.post('/signup', passport.authenticate('registro-local', {
@@ -31,19 +31,19 @@ router.post('/signup', passport.authenticate('registro-local', {
 router.get('/inicio',Auth.isAuthentication, usuarioController.logged)
 
 //cargar perfil del usuario
-router.get('/profile', usuarioController.perfil)
+router.get('/profile', Auth.isAuthentication,  usuarioController.perfil)
 
 //cerrar sesion y regresar a la pagina principal
 router.get('/logout', usuarioController.logout);
 
 //vista de editar usuario
-router.get('/edit/:id', usuarioController.modView)
+router.get('/edit/:id', Auth.isAuthentication, usuarioController.modView)
 
 //actualizar el rol del usuario
 router.post('/edit/:id', usuarioController.modificar)
 
 //mostrar todos los usuarios
-router.get('/users/:id', usuarioController.mostrar)
+router.get('/users/:id', Auth.isAuthentication, usuarioController.mostrar)
 
 
 module.exports = router
