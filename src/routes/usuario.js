@@ -5,7 +5,7 @@ const usuarioController = require('../controllers/usuario')
 const passport = require('passport');
 
 //pagina principal
-router.get('/', usuarioController.inicio)
+router.get('/', Auth.isAuthenticationIndex, usuarioController.inicio)
 
 //vista de login
 router.get('/login', usuarioController.sesion)
