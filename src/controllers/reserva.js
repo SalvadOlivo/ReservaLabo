@@ -66,7 +66,7 @@ const registrarse = async (req, res) =>{
     const lab = await Lab.findById(req.body.laboratorio);
     const user = await User.findById(req.body.creada_por);
     var bandera = true;
-    const response = await fetch('https://proyecto-web-2019.herokuapp.com/obtener', {
+    const response = await fetch('http://localhost:3000/obtener', {
         method: 'GET'
     })
     const responselab = await fetch('https://proyecto-web-2019.herokuapp.com/lab', {
@@ -247,7 +247,7 @@ const eliminar = async (req, res) =>{
 
 const mostrarReserva = async (req, res) => {
     const { id } = req.params;
-    const response = await fetch('https://proyecto-web-2019.herokuapp.com/obtener', {
+    const response = await fetch('http://localhost:3000/obtener', {
         method: 'GET'
     })
     const registros = await response.json();
