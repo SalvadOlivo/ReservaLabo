@@ -37,10 +37,10 @@ router.get('/profile', Auth.isAuthentication,  usuarioController.perfil)
 router.get('/logout', usuarioController.logout);
 
 //vista de editar usuario
-router.get('/edit/:id', Auth.isAuthentication, usuarioController.modView)
+router.get('/edit/:user/:id', Auth.isAuthentication, usuarioController.modView)
 
 //actualizar el rol del usuario
-router.post('/edit/:id', usuarioController.modificar)
+router.post('/edit/:user/:id', Auth.isAuthentication, usuarioController.modificar)
 
 //mostrar todos los usuarios
 router.get('/users/:id', Auth.isAuthentication, usuarioController.mostrar)

@@ -41,11 +41,11 @@ const logged = async (req, res) => {
 
 //MODIFICAR
 const modificar = async (req, res) => {
-    const { id } = req.params;
+    const { user, id } = req.params;
     await User.update({
         _id: id
     }, req.body);
-    res.redirect('/profile');
+    res.redirect(`/users/${user}`);
 }
 
 
@@ -53,6 +53,7 @@ const mostrar = async (req, res) => {
     const { id } = req.params;
     const usuarios = await User.find()
     const usuario_log = await User.findById(id);
+    console.log(usuario_log._id)
     res.render('usuarios', {
         users : usuarios,
         user: usuario_log
@@ -60,10 +61,11 @@ const mostrar = async (req, res) => {
 }
 
 const modView = async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const usuario = await User.findById(req.params.id);
+    const user1 = await User.findById(req.params.user);
     res.render('mod_user', {
-        user
+        user: user1,
+        usuario
     })
 }
 

@@ -31,7 +31,7 @@
                                       <td><%= users[i].username %></td>
                                       <td><%= users[i].rol%></td>
                                       <td>
-                                        <a href="/edit/<%= users[i]._id %>" class="btn btn-info"> Editar </a>
+                                        <a href="/edit/<%= user._id %>/<%= users[i]._id %>" class="btn btn-info"> Editar </a>
                                       </td>
                                     </tr>
                                 <% } %>
